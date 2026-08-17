@@ -1,0 +1,840 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Army of God Automobile | Spare Parts & Cars in Cameroon</title>
+  <style>
+:root {
+  --primary: #0b3d4f;
+  --primary-dark: #062b38;
+  --accent: #ff7a00;
+  --accent-soft: #fff1e2;
+  --dark: #111827;
+  --light: #f5f8fb;
+  --text: #344054;
+  --white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  color: var(--text);
+  background: linear-gradient(180deg, #f8fafc 0%, #edf5f8 100%);
+}
+
+img { width: 100%; display: block; }
+a { text-decoration: none; }
+
+.homepage-container { display: block; }
+
+.hero {
+  min-height: 92vh;
+  background:
+    linear-gradient(rgba(3, 20, 30, 0.74), rgba(3, 20, 30, 0.82)),
+    url("pictures/kia.jpg");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 24px 20px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.top-nav {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 12px 0 24px;
+  position: relative;
+}
+
+.top-nav a {
+  color: white;
+  font-weight: 700;
+  padding: 8px 12px;
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+.top-nav a:hover { background: rgba(255, 255, 255, 0.12); }
+
+.hero-content {
+  max-width: 900px;
+  margin: 60px auto 0;
+  text-align: left;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.16);
+  padding: 32px;
+  border-radius: 24px;
+  backdrop-filter: blur(8px);
+}
+
+.hero h1 {
+  font-size: clamp(2.3rem, 5vw, 4rem);
+  margin-bottom: 16px;
+  line-height: 1.1;
+}
+
+.hero p {
+  font-size: 1.05rem;
+  max-width: 740px;
+  margin: 0 0 24px;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.hero-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 30px;
+}
+
+.hero-strip .mini-card {
+  background: rgba(255,255,255,0.12);
+  padding: 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+main { padding: 0 20px 40px; }
+
+.section {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 60px 0;
+}
+
+.section-alt {
+  background: #edf4f7;
+  border-radius: 20px;
+  padding: 60px 24px;
+}
+
+.section-heading {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.section-heading h2 {
+  color: var(--primary);
+  font-size: clamp(1.7rem, 2.6vw, 2.4rem);
+  margin-bottom: 8px;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 700;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+.btn-primary { background: var(--accent); color: white; }
+.btn-secondary { background: white; color: var(--dark); }
+
+.category-section { margin-bottom: 40px; }
+
+.category-title {
+  color: var(--primary);
+  font-size: 1.4rem;
+  margin: 30px 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #e6f0f3;
+}
+
+.parts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+.part-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(11,61,79,0.07);
+  transition: transform 0.3s ease;
+}
+
+.part-card:hover { transform: translateY(-4px); }
+.part-card img { height: 140px; object-fit: cover; background: #f0f6f8; }
+.part-name { padding: 12px; text-align: center; font-weight: 700; color: var(--primary); font-size: 0.95rem; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(11,61,79,0.08);
+  transition: transform 0.3s ease;
+}
+
+.card:hover { transform: translateY(-5px); }
+.card img { height: 200px; object-fit: cover; }
+.card-content { padding: 18px; }
+.card h3 { color: var(--primary); margin-bottom: 8px; }
+.card .price { color: var(--accent); font-weight: 700; font-size: 1.1rem; margin: 8px 0; }
+
+/* ========== SERVICES & BENEFITS CARDS ========== */
+.benefit {
+  background: white;
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 8px 24px rgba(11,61,79,0.08);
+  transition: all 0.3s ease;
+  border-left: 4px solid var(--accent);
+}
+
+.benefit:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(11,61,79,0.12);
+}
+
+.benefit h3 {
+  color: var(--primary);
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.benefit p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+
+.service-box {
+  background: white;
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 8px 24px rgba(11,61,79,0.08);
+  transition: all 0.3s ease;
+  text-align: center;
+  border-top: 4px solid var(--accent);
+  position: relative;
+  overflow: hidden;
+}
+
+.service-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255, 122, 0, 0.05) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.service-box:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 50px rgba(11,61,79,0.15);
+}
+
+.service-box h3 {
+  color: var(--primary);
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.service-box p {
+  color: #666;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  position: relative;
+  z-index: 1;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+.about-section { padding-top: 20px; }
+.about-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
+.about-section h2 { color: var(--primary); margin-bottom: 12px; }
+
+.brand-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.brand-pill {
+  background: linear-gradient(135deg, #e6f0f3 0%, #d4e8f0 100%);
+  color: var(--primary);
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  border: 2px solid rgba(11, 61, 79, 0.1);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(11, 61, 79, 0.08);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.brand-pill::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.brand-pill:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(11, 61, 79, 0.15);
+  border-color: var(--accent);
+  background: linear-gradient(135deg, var(--accent) 0%, #ff9933 100%);
+  color: white;
+}
+
+.brand-pill:hover::before {
+  left: 100%;
+}
+
+/* ========== LIVE CHAT BUTTON ========== */
+/* ========== WHATSAPP BUTTON ========== */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #25D366 0%, #20ba58 100%);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+  transition: all 0.3s ease;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse 2s infinite 0.3s;
+  text-decoration: none;
+}
+
+.whatsapp-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 35px rgba(37, 211, 102, 0.45);
+}
+
+.whatsapp-btn::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid #25D366;
+  animation: ring 1.5s infinite 0.3s;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.3);
+    opacity: 0;
+  }
+}
+
+.contact-card {
+  max-width: 700px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  padding: 34px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(6,43,56,0.24);
+}
+
+.contact-card h2 { margin-bottom: 10px; }
+.contact-card ul { list-style: none; margin: 18px 0; }
+.contact-card li { margin: 8px 0; }
+
+footer {
+  text-align: center;
+  padding: 24px 20px 40px;
+  color: #64748b;
+}
+
+@media (max-width: 780px) {
+  .parts-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+}
+  </style>
+</head>
+<body>
+
+<div class="homepage-container" id="homepage">
+  <header class="hero" id="home">
+    <nav class="top-nav">
+      <a href="#home">Home</a>
+      <a href="#cars">Cars for Sale</a>
+      <a href="#parts">Spare Parts</a>
+      <!-- <a href="#lubricants">Lubricants</a> -->
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="hero-content">
+      <p class="eyebrow">Automobiles • Spare Parts • Lubricants</p>
+      <h1>Army of God Automobile</h1>
+      <p>Quality cars for sale, genuine spare parts, and dependable solutions for cars, trucks, and machinery across Cameroon.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#cars">View Cars for Sale</a>
+        <a class="btn btn-secondary" href="#parts">Browse Spare Parts</a>
+      </div>
+      <div class="hero-strip">
+        <div class="mini-card"><h3>Quality Vehicles</h3><p>Carefully selected cars at fair prices.</p></div>
+        <div class="mini-card"><h3>Genuine Parts</h3><p>Trusted brands for all vehicle repairs.</p></div>
+        <div class="mini-card"><h3>Nationwide Delivery</h3><p>Fast supply to your location.</p></div>
+      </div>
+    </div>
+  </header>
+
+  
+      <section class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Why choose us</p>
+          <h2>Dependable service for serious drivers</h2>
+        </div>
+
+        <div class="benefits">
+          <div class="benefit">
+            <h3>Quality-first supply</h3>
+            <p>Strong value for long-term vehicle performance and low downtime.</p>
+          </div>
+          <div class="benefit">
+            <h3>Fair prices</h3>
+            <p>Cost-effective service for shops, businesses, and individual owners.</p>
+          </div>
+          <div class="benefit">
+            <h3>Fast availability</h3>
+            <p>Popular parts are stocked to keep urgent repairs moving quickly.</p>
+          </div>
+          <div class="benefit">
+            <h3>Local support</h3>
+            <p>Serving drivers and businesses across Cameroon with practical assistance.</p>
+          </div>
+        </div>
+      </section>
+
+      
+      <section class="section section-alt" id="services">
+        <div class="section-heading">
+          <p class="eyebrow">Our services</p>
+          <h2>More than just parts supply</h2>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-box">
+            <h3>Parts Sourcing</h3>
+            <p>We help workshops and drivers source the exact component they need quickly.</p>
+          </div>
+          <div class="service-box">
+            <h3>Workshop Advice</h3>
+            <p>Technical recommendations and part-matching support for practical repairs.</p>
+          </div>
+          <div class="service-box">
+            <h3>Fleet Supply</h3>
+            <p>Reliable stock support for transport companies, taxis, buses, and delivery fleets.</p>
+          </div>
+        </div>
+      </section>
+
+  <main>
+    <!-- CARS FOR SALE -->
+    <section class="section" id="cars">
+      <div class="section-heading">
+        <p class="eyebrow">Available Vehicles</p>
+        <h2>Cars for Sale</h2>
+      </div>
+      <div class="card-grid">
+        <article class="card">
+          <img src="pictures/kia.jpg" alt="Kia Sedan">
+          <div class="card-content">
+            <h3>Kia Cerato</h3>
+            <p>Clean sedan, 2018 model, automatic, full option.</p>
+            <p class="price">₦ 7,500,000 / 4,500,000 FCFA</p>
+            <button class="btn btn-primary">Inquire Now</button>
+          </div>
+        </article>
+        <article class="card">
+          <img src="pictures\Toyota Hilux.jpg" alt="Toyota Hilux">
+          <div class="card-content">
+            <h3>Toyota Hilux</h3>
+            <p>2020 pickup, diesel, 4x4, excellent condition.</p>
+            <p class="price">₦ 18,500,000 / 11,000,000 FCFA</p>
+            <button class="btn btn-primary">Inquire Now</button>
+          </div>
+        </article>
+        <article class="card">
+          <img src="pictures\Toyota Yaris.jpg" alt="Toyota Yaris">
+          <div class="card-content">
+            <h3>Toyota Yaris</h3>
+            <p>2017 hatchback, fuel efficient, neat interior.</p>
+            <p class="price">₦ 6,200,000 / 3,800,000 FCFA</p>
+            <button class="btn btn-primary">Inquire Now</button>
+          </div>
+        </article>
+        <article class="card">
+          <img src="Mercedez benz van.jpg" alt="Mercedes Van">
+          <div class="card-content">
+            <h3>Mercedes-Benz Van</h3>
+            <p>Spacious transport van, diesel, well maintained.</p>
+            <p class="price">₦ 12,000,000 / 7,200,000 FCFA</p>
+            <button class="btn btn-primary">Inquire Now</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ABOUT US -->
+    <section class="section about-section" id="about">
+      <div class="section-heading">
+        <p class="eyebrow">Who We Are</p>
+        <h2>About Army of God Automobile</h2>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p>Army of God Automobile is a trusted supplier of quality cars, genuine spare parts, and lubricants serving customers across Cameroon. We source vehicles carefully and stock parts for a wide range of makes and models, backed by reliable delivery and customer support.</p>
+          <p style="margin-top:12px">Visit our parts catalogue or contact us for enquiries — we're happy to help.</p>
+        </div>
+        <div>
+          <div class="brand-list">
+            <div class="brand-pill">Toyota</div>
+            <div class="brand-pill">Kia</div>
+            <div class="brand-pill">Mercedes</div>
+            <div class="brand-pill">Nissan</div>
+            <div class="brand-pill">Honda</div>
+            <div class="brand-pill">Mitsubuishi</div>
+            <div class="brand-pill">Ford</div>
+            <div class="brand-pill">HighLander</div>
+            <div class="brand-pill">Golf</div>
+            <div class="brand-pill"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPARE PARTS -->
+    <section class="section section-alt" id="parts">
+      <div class="section-heading">
+        <p class="eyebrow">Complete Catalogue</p>
+        <h2>All Spare Parts</h2>
+      </div>
+
+      <!-- 1. SUSPENSION & STEERING -->
+      <div class="category-section">
+        <h3 class="category-title">🛠️ 1. Suspension & Steering</h3>
+        <div class="parts-grid">
+          <div class="part-card"><img src="pictures/Shock%20Absorber.jpg" alt="Shock Absorber"><div class="part-name">Shock Absorber</div></div>
+          <div class="part-card"><img src="pictures/strut.jpg" alt="Strut"><div class="part-name">Strut</div></div>
+          <div class="part-card"><img src="pictures\Leaf Spring.jpg" alt="Leaf Spring"><div class="part-name">Leaf Spring</div></div>
+          <div class="part-card"><img src="pictures\Control Arm.jpg" alt="Control Arm"><div class="part-name">Control Arm</div></div>
+          <div class="part-card"><img src="pictures\Ball Joint.jpg" alt="Ball Joint"><div class="part-name">Ball Joint</div></div>
+          <div class="part-card"><img src="pictures\Coil Spring.jpg" alt="Coil Spring"><div class="part-name">Coil Spring</div></div>
+          <div class="part-card"><img src="pictures\Tie Rod End.jpg" alt="Tie Rod End"><div class="part-name">Tie Rod End</div></div>
+          <div class="part-card"><img src="pictures\Inner Tie Rod.jpg" alt="Inner Tie Rod"><div class="part-name">Inner Tie Rod</div></div>
+          <div class="part-card"><img src="pictures\Rack End.jpg" alt="Rack End"><div class="part-name">Rack End</div></div>
+          <div class="part-card"><img src="pictures\Stabilizer Bar.jpg" alt="Stabilizer Bar"><div class="part-name">Stabilizer Bar</div></div>
+          <div class="part-card"><img src="pictures\Stabilizer link.jpg" alt="Stabilizer Link"><div class="part-name">Stabilizer Link</div></div>
+          <div class="part-card"><img src="pictures\Stabilizer Bar.jpg" alt="Stabilizer Bush"><div class="part-name">Stabilizer Bush</div></div>
+          <div class="part-card"><img src="pictures\Control Arm Bush.jpg" alt="Control Arm Bush"><div class="part-name">Control Arm Bush</div></div>
+          <div class="part-card"><img src="pictures\Wheel Hub.jpg" alt="Wheel Hub"><div class="part-name">Wheel Hub</div></div>
+          <div class="part-card"><img src="pictures\Wheel Bearing.jpg" alt="Wheel Bearing"><div class="part-name">Wheel Bearing</div></div>
+          <div class="part-card"><img src="pictures\Steering Knuckle.jpg" alt="Steering Knuckle"><div class="part-name">Steering Knuckle</div></div>
+          <div class="part-card"><img src="pictures\Steering rack.jpg" alt="Steering Rack"><div class="part-name">Steering Rack</div></div>
+          <div class="part-card"><img src="pictures\Power Steering Pump.jpg" alt="Power Steering Pump"><div class="part-name">Power Steering Pump</div></div>
+          <div class="part-card"><img src="pictures\CV Axle and  Drive Shaft.jpg" alt="CV Axle"><div class="part-name">CV Axle / Drive Shaft</div></div>
+          <div class="part-card"><img src="pictures\Cv Boot.jpg" alt="CV Boot"><div class="part-name">CV Boot</div></div>
+          <div class="part-card"><img src="pictures\CV Joint.jpg" alt="CV Joint"><div class="part-name">CV Joint</div></div>
+          <div class="part-card"><img src="pictures\Pitman Arm.jpg" alt="Pitman Arm"><div class="part-name">Pitman Arm</div></div>
+          <div class="part-card"><img src="pictures\Idler Arm.jpg" alt="Idler Arm"><div class="part-name">Idler Arm</div></div>
+        </div>
+      </div>
+
+      <!-- 2. BRAKE SYSTEM -->
+      <div class="category-section">
+        <h3 class="category-title">🛑 2. Brake System</h3>
+        <div class="parts-grid">
+          <div class="part-card"><img src="pictures\Brake Pads.jpg" alt="Brake Pads"><div class="part-name">Brake Pads</div></div>
+          <div class="part-card"><img src="pictures\Brake Disc and Rotor.jpg" alt="Brake Disc"><div class="part-name">Brake Disc / Rotor</div></div>
+          <div class="part-card"><img src="pictures\Brake Drum.jpg" alt="Brake Drum"><div class="part-name">Brake Drum</div></div>
+          <div class="part-card"><img src="pictures\Brake Shoes.jpg" alt="Brake Shoes"><div class="part-name">Brake Shoes</div></div>
+          <div class="part-card"><img src="pictures\Brake Caliper.jpg" alt="Brake Caliper"><div class="part-name">Brake Caliper</div></div>
+          <div class="part-card"><img src="pictures\Brake Master Cylinde.jpg" alt="Brake Master Cylinder"><div class="part-name">Brake Master Cylinder</div></div>
+          <div class="part-card"><img src="pictures\Brake Master Cylinde.jpg" alt="Brake Wheel Cylinder"><div class="part-name">Brake Wheel Cylinder</div></div>
+          <div class="part-card"><img src="pictures\Brake Booster.jpg" alt="Brake Booster"><div class="part-name">Brake Booster</div></div>
+          <div class="part-card"><img src="pictures\Brake Hose.jpg" alt="Brake Hose"><div class="part-name">Brake Hose</div></div>
+          <div class="part-card"><img src="pictures\Brake Pipe.jpg" alt="Brake Pipe"><div class="part-name">Brake Pipe</div></div>
+          <div class="part-card"><img src="pictures\ABS Sensor.jpg" alt="ABS Sensor"><div class="part-name">ABS Sensor</div></div>
+          <div class="part-card"><img src="pictures\ABS Module.jpg" alt="ABS Module"><div class="part-name">ABS Module</div></div>
+          <div class="part-card"><img src="pictures\Handbrake Cable.jpg" alt="Handbrake Cable"><div class="part-name">Handbrake Cable</div></div>
+          <div class="part-card"><img src="pictures\Brake Fluid Reservoir.jpg" alt="Brake Fluid Reservoir"><div class="part-name">Brake Fluid Reservoir</div></div>
+        </div>
+      </div>
+
+      <!-- 3. ENGINE PARTS -->
+      <div class="category-section">
+        <h3 class="category-title">🔧 3. Engine Parts</h3>
+        <div class="parts-grid">
+          <div class="part-card"><img src="pictures\Engine Block.jpg" alt="Engine Block"><div class="part-name">Engine Block</div></div>
+          <div class="part-card"><img src="pictures\Cylinder Head.jpg" alt="Cylinder Head"><div class="part-name">Cylinder Head</div></div>
+          <div class="part-card"><img src="pictures\Head Gasket.jpg" alt="Head Gasket"><div class="part-name">Head Gasket</div></div>
+          <div class="part-card"><img src="pictures\piston.jpg" alt="Piston"><div class="part-name">Piston</div></div>
+          <div class="part-card"><img src="pictures\Piston Ring Set.jpg" alt="Piston Rings"><div class="part-name">Piston Rings</div></div>
+          <div class="part-card"><img src="pictures\Connecting Rod.jpg" alt="Connecting Rod"><div class="part-name">Connecting Rod</div></div>
+          <div class="part-card"><img src="pictures/crankshaft.jpg" alt="Crankshaft"><div class="part-name">Crankshaft</div></div>
+          <div class="part-card"><img src="pictures\Crankshaft.jpg" alt="Camshaft"><div class="part-name">Camshaft</div></div>
+          <div class="part-card"><img src="pictures\Timing Belt.jpg" alt="Timing Belt"><div class="part-name">Timing Belt</div></div>
+          <div class="part-card"><img src="pictures\Timing Chain.jpg" alt="Timing Chain"><div class="part-name">Timing Chain</div></div>
+          <div class="part-card"><img src="pictures\Timing Belt Tensioner.jpg" alt="Timing Belt Tensioner"><div class="part-name">Timing Belt Tensioner</div></div>
+          <div class="part-card"><img src="pictures\Timing Chain Tensioner.jpg" alt="Timing Chain Tensioner"><div class="part-name">Timing Chain Tensioner</div></div>
+          <div class="part-card"><img src="pictures\Rocker Arm.jpg" alt="Rocker Arm"><div class="part-name">Rocker Arm</div></div>
+          <div class="part-card"><img src="pictures\Valve.jpg" alt="Valves"><div class="part-name">Valves</div></div>
+          <div class="part-card"><img src="pictures\Valve Spring.jpg" alt="Valve Springs"><div class="part-name">Valve Springs</div></div>
+          <div class="part-card"><img src="pictures\Valve Cover.jpg" alt="Valve Cover"><div class="part-name">Valve Cover</div></div>
+          <div class="part-card"><img src="pictures\Oil Pan Sump.jpg" alt="Oil Pan"><div class="part-name">Oil Pan / Sump</div></div>
+          <div class="part-card"><img src="pictures\Oil Pump.jpg" alt="Oil Pump"><div class="part-name">Oil Pump</div></div>
+          <div class="part-card"><img src="pictures\Water pump.jpg" alt="Water Pump"><div class="part-name">Water Pump</div></div>
+          <div class="part-card"><img src="pictures\Engine Mount.jpg" alt="Engine Mount"><div class="part-name">Engine Mount</div></div>
+          <div class="part-card"><img src="pictures\Flywheel.jpg" alt="Flywheel"><div class="part-name">Flywheel</div></div>
+          <div class="part-card"><img src="pictures\Harmonic Balancer.jpg" alt="Harmonic Balancer"><div class="part-name">Harmonic Balancer</div></div>
+        </div>
+      </div>
+
+      <!-- 4. COOLING SYSTEM -->
+      <div class="category-section">
+        <h3 class="category-title">🌡️ 4. Cooling System</h3>
+        <div class="parts-grid">
+          <div class="part-card"><img src="pictures\Radiator.jpg" alt="Radiator"><div class="part-name">Radiator</div></div>
+          <div class="part-card"><img src="pictures\Radiator Fan.jpg" alt="Radiator Fan"><div class="part-name">Radiator Fan</div></div>
+          <div class="part-card"><img src="pictures\Fan Motor.jpg" alt="Fan Motor"><div class="part-name">Fan Motor</div></div>
+          <div class="part-card"><img src="pictures\Thermostat.jpg" alt=" "><div class="part-name">Thermostat</div></div>
+          <div class="part-card"><img src="pictures\Thermostat Housing.jpg" alt="Thermostat Housing"><div class="part-name">Thermostat Housing</div></div>
+          <div class="part-card"><img src="pictures\Radiator Hose.jpg" alt="Radiator Hose"><div class="part-name">Radiator Hose</div></div>
+          <div class="part-card"><img src="pictures\Coolant Reservoir.jpg" alt="Coolant Reservoir"><div class="part-name">Coolant Reservoir</div></div>
+          <div class="part-card"><img src="pictures\Radiator.jpg" alt="Radiator Cap"><div class="part-name">Radiator Cap</div></div>
+          <div class="part-card"><img src="pictures\Temperature Sensor.jpg" alt="Temperature Sensor"><div class="part-name">Temperature Sensor</div></div>
+          <div class="part-card"><img src="pictures\Cooling Fan Relay.jpg" alt="Cooling Fan Relay"><div class="part-name">Cooling Fan Relay</div></div>
+        </div>
+      </div>
+
+      <!-- 5. FUEL SYSTEM -->
+      <div class="category-section">
+        <h3 class="category-title">⛽ 5. Fuel System</h3>
+        <div class="parts-grid">
+          <div class="part-card"><img src="pictures\Fuel Pump.jpg" alt="Fuel Pump"><div class="part-name">Fuel Pump</div></div>
+          <div class="part-card"><img src="pictures\Fuel Injector.jpg" alt="Fuel Injector"><div class="part-name">Fuel Injector</div></div>
+          <div class="part-card"><img src="pictures\Fuel Filter.jpg" alt="Fuel Filter"><div class="part-name">Fuel Filter</div></div>
+          <div class="part-card"><img src="pictures\Fuel Tank.jpg" alt="Fuel Tank"><div class="part-name">Fuel Tank</div></div>
+          <div class="part-card"><img src="pictures\Fuel Tank Cap.jpg" alt="Fuel Tank Cap"><div class="part-name">Fuel Tank Cap</div></div>
+          <div class="part-card"><img src="pictures\Fuel Pressure Regulator.jpg" alt="Fuel Pressure Regulator"><div class="part-name">Fuel Pressure Regulator</div></div>
+          <div class="part-card"><img src="pictures\Fuel Rail.jpg" alt="Fuel Rail"><div class="part-name">Fuel Rail</div></div>
+          <div class="part-card"><img src="pictures\Fuel Pump Relay.jpg" alt="Fuel Pump Relay"><div class="part-name">Fuel Pump Relay</div></div>
+          <div class="part-card"><img src="pictures\Throttle Body.jpg" alt="Throttle Body"><div class="part-name">Throttle Body</div></div>
+          <div class="part-card"><img src="pictures/carburetor.jpg" alt="Carburetor"><div class="part-name">Carburetor</div></div>
+        </div>
+      </div>
+
+      <!-- 6. ELECTRICAL & IGNITION -->
+      <div class="category-section">
+        <h3 class="category-title">⚡ 6. Electrical & Ignition</h3>
+        <div class="parts-grid">
+          <div class="part-card"><img src="pictures\Battery.jpg" alt="Battery"><div class="part-name">Battery</div></div>
+          <div class="part-card"><img src="pictures\Alternator.jpg" alt="Alternator"><div class="part-name">Alternator</div></div>
+          <div class="part-card"><img src="pictures\Starter Motor.jpg" alt="Starter Motor"><div class="part-name">Starter Motor</div></div>
+          <div class="part-card"><img src="pictures\Spark Plug.jpg" alt="Spark Plug"><div class="part-name">Spark Plug</div></div>
+          <div class="part-card"><img src="pictures\Ignition Coil.jpg" alt="Ignition Coil"><div class="part-name">Ignition Coil</div></div>
+          <div class="part-card"><img src="pictures\Spark Plug Wire.jpg" alt="Spark Plug Wire"><div class="part-name">Spark Plug Wire</div></div>
+          <div class="part-card"><img src="pictures\Distributor.jpg" alt="Distributor"><div class="part-name">Distributor</div></div>
+          <div class="part-card"><img src="pictures\ECU and ECM.jpg" alt="ECU"><div class="part-name">ECU / ECM</div></div>
+          <div class="part-card"><img src="pictures\Fuse.jpg" alt="Fuse"><div class="part-name">Fuse</div></div>
+          <div class="part-card"><img src="pictures\Fuse Box.jpg" alt="Fuse Box"><div class="part-name">Fuse Box</div></div>
+          <div class="part-card"><img src="pictures\Relay.jpg" alt="Relay"><div class="part-name">Relay</div></div>
+          <div class="part-card"><img src="pictures\Oxygen Sensor.jpg" alt="Oxygen Sensor"><div class="part-name">O₂ / Oxygen Sensor</div></div>
+          <div class="part-card"><img src="pictures\Crankshaft Sensor.jpg" alt="Crankshaft Sensor"><div class="part-name">Crankshaft Position Sensor</div></div>
+          <div class="part-card"><img src="pictures\Camshaft.jpg" alt="Camshaft Sensor"><div class="part-name">Camshaft Position Sensor</div></div>
+          <div class="part-card"><img src="pictures\MAF Sensor.jpg" alt="MAF Sensor"><div class="part-name">MAF Sensor</div></div>
+          <div class="part-card"><img src="pictures\Map sensor.jpg" alt="MAP Sensor"><div class="part-name">MAP Sensor</div></div>
+          <div class="part-card"><img src="pictures\Knock Sensor.jpg" alt="Knock Sensor"><div class="part-name">Knock Sensor</div></div>
+        </div>
+      </div>
+
+      <!-- 7. AIR INTAKE & EXHAUST -->
+      <div class="category-section">
+        <h3 class="category-title">🌬️ 7. Air Intake & Exhaust</h3>
+        <div class="parts-grid">
+          <div class="part-card"><img src="pictures\Air Filter.jpg" alt="Air Filter"><div class="part-name">Air Filter</div></div>
+          <div class="part-card"><img src="pictures\Air Filter Housing.jpg" alt="Air Filter Housing"><div class="part-name">Air Filter Housing</div></div>
+          <div class="part-card"><img src="pictures\Intake Manifold.jpg" alt="Intake Manifold"><div class="part-name">Intake Manifold</div></div>
+          <div class="part-card"><img src="pictures\Intake Hose.jpg" alt="Intake Hose"><div class="part-name">Intake Hose</div></div>
+          <div class="part-card"><img src="pictures\Turbocharger.jpg" alt="Turbocharger"><div class="part-name">Turbocharger</div></div>
+          <div class="part-card"><img src="pictures\Intercooler.jpg" alt="Intercooler"><div class="part-name">Intercooler</div></div>
+          <div class="part-card"><img src="pictures\Exhaust Manifold.jpg" alt="Exhaust Manifold"><div class="part-name">Exhaust Manifold</div></div>
+          <div class="part-card"><img src="pictures\Catalytic Converte.jpg" alt="Catalytic Converter"><div class="part-name">Catalytic Converter</div></div>
+          <div class="part-card"><img src="pictures\Exhaust Pipe.jpg" alt="Exhaust Pipe"><div class="part-name">Exhaust Pipe</div></div>
+          <div class="part-card"><img src="pictures\Muffler and Silencer.jpg" alt="Muffler"><div class="part-name">Muffler / Silencer</div></div>
+          <div class="part-card"><img src="pictures\Exhaust Gasket.jpg" alt="Exhaust Gasket"><div class="part-name">Exhaust Gasket</div></div>
+          <div class="part-card"><img src="pictures\EGR Valve.jpg" alt="EGR Valve"><div class="part-name">EGR Valve</div></div>
+        </div>
+      </div>
+
+      <!-- 8. TRANSMISSION & CLUTCH -->
+      <div class="category-section">
+        <h3 class="category-title">⚙️ 8. Transmission & Clutch</h3>
+        <div class="parts-grid">
+          <div class="part-card"><img src="pictures\Gearbox and Transmission.jpg" alt="Gearbox"><div class="part-name">Gearbox / Transmission</div></div>
+          <div class="part-card"><img src="pictures\Clutch Plate.jpg" alt="Clutch Plate"><div class="part-name">Clutch Plate</div></div>
+          <div class="part-card"><img src="pictures\Clutch Pressure Plate.jpg" alt="Clutch Pressure Plate"><div class="part-name">Clutch Pressure Plate</div></div>
+          <div class="part-card"><img src="pictures\Clutch Release Bearing.jpg" alt="Clutch Release Bearing"><div class="part-name">Clutch Release Bearing</div></div>
+          <div class="part-card"><img src="pictures\Clutch Master Cylinder.jpg" alt="Clutch Master Cylinder"><div class="part-name">Clutch Master Cylinder</div></div>
+          <div class="part-card"><img src="pictures\Clutch Slave Cylinder.jpg" alt="Clutch Slave Cylinder"><div class="part-name">Clutch Slave Cylinder</div></div>
+          <div class="part-card"><img src="pictures\Flywheel.jpg" alt="Flywheel"><div class="part-name">Flywheel</div></div>
+          <div class="part-card"><img src="pictures\Gear Selector.jpg" alt="Gear Selector"><div class="part-name">Gear Selector</div></div>
+          <div class="part-card"><img src="pictures\Transmission Mount.jpg" alt="Transmission Mount"><div class="part-name">Transmission Mount</div></div>
+          <div class="part-card"><img src="pictures\Transmission Oil Filter.jpg" alt="Transmission Filter"><div class="part-name">Transmission Oil Filter</div></div>
+          <div class="part-card"><img src="pictures\Driveshaft and Propeller Shaft.jpg" alt="Driveshaft"><div class="part-name">Driveshaft / Propeller Shaft</div></div>
+          <div class="part-card"><img src="pictures\Differential.jpg" alt="Differential"><div class="part-name">Differential</div></div>
+          <div class="part-card"><img src="pictures\Differential Oil Seal.jpg" alt="Differential Oil Seal"><div class="part-name">Differential Oil Seal</div></div>
+        </div>
+      </div>
+
+      <!-- 9. WHEELS & TYRES -->
+      <div class="category-section">
+        <h3 class="category-title">🛞 9. Wheels & Tyres</h3>
+        <div class="parts-grid">
+          <div class="part-card"><img src="" alt="Tyre"><div class="part-name">Tyre</div></div>
+          <div class="part-card"><img src="pictures\Wheel and Rim.jpg" alt="Wheel Rim"><div class="part-name">Wheel / Rim</div></div>
+          <div class="part-card"><img src="pictures\Wheel Hub.jpg" alt="Wheel Hub"><div class="part-name">Wheel Hub</div></div>
+          <div class="part-card"><img src="pictures\Wheel Bearing.jpg" alt="Wheel Bearing"><div class="part-name">Wheel Bearing</div></div>
+          <div class="part-card"><img src="pictures\Lug Nuts and Wheel Nuts.jpg" alt="Lug Nuts"><div class="part-name">Lug Nuts / Wheel Nuts</div></div>
+          <div class="part-card"><img src="pictures\Wheel Studs.jpg" alt="Wheel Studs"><div class="part-name">Wheel Studs</div></div>
+          <div class="part-card"><img src="pictures\wheel bots.jpg" alt="Wheel Bolts"><div class="part-name">Wheel Bolts</div></div>
+          <div class="part-card"><img src="pictures\Spare Tyre.jpg" alt="Spare Tyre"><div class="part-name">Spare Tyre</div></div>
+          <div class="part-card"><img src="pictures\Wheel Cover and Hubcap.jpg" alt="Wheel Cover"><div class="part-name">Wheel Cover / Hubcap</div></div>
+          <div class="part-card"><img src="pictures\TPMS Sensor.jpg" alt="TPMS Sensor"><div class="part-name">TPMS Sensor</div></div>
+        </div>
+      </div>
+
+      <!-- 10. BODY & EXTERIOR -->
+      <div class="category-section">
+        <h3 class="category-title">🚘 10. Body & Exterior</h3>
+        <div class="parts-grid">
+          <div class="part-card"><img src="pictures\Front Bumper.jpg" alt="Front Bumper"><div class="part-name">Front Bumper</div></div>
+          <div class="part-card"><img src="pictures\Rear Bumper.jpg" alt="Rear Bumper"><div class="part-name">Rear Bumper</div></div>
+          <div class="part-card"><img src="pictures\Bonnet and Hood.jpg" alt="Bonnet / Hood"><div class="part-name">Bonnet / Hood</div></div>
+          <div class="part-card"><img src="pictures\Fender.jpg" alt="Fender"><div class="part-name">Fender / Wing</div></div>
+          <div class="part-card"><img src="pictures\Door exterior.jpg" alt="Door"><div class="part-name">Door</div></div>
+          <div class="part-card"><img src="pictures\Door Handle.jpg" alt="Door Handle"><div class="part-name">Door Handle</div></div>
+          <div class="part-card"><img src="pictures\Door Lock.jpg" alt="Door Lock"><div class="part-name">Door Lock</div></div>
+          <div class="part-card"><img src="pictures\Side Mirror.jpg" alt="Side Mirror"><div class="part-name">Side Mirror</div></div>
+          <div class="part-card"><img src="pictures\Windscreen.jpg" alt="Windscreen"><div class="part-name">Windscreen</div></div>
+          <div class="part-card"><img src="pictures\wiper blade.jpg" alt="Wiper Blade"><div class="part-name">Wiper Blade</div></div>
+          <div class="part-card"><img src="pictures\wipermotor.jpg" alt="Wiper Motor"><div class="part-name">Wiper Motor</div></div>
+          <div class="part-card"><img src="pictures\Headlight.jpg" alt="Headlight"><div class="part-name">Headlight</div></div>
+          <div class="part-card"><img src="pictures\Tail Light.jpg" alt="Tail Light"><div class="part-name">Tail Light</div></div>
+          <div class="part-card"><img src="pictures\Fog Light.jpg" alt="Fog Light"><div class="part-name">Fog Light</div></div>
+          <div class="part-card"><img src="pictures/grille.jpg" alt="Grille"><div class="part-name">Grille</div></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="contact-card">
+        <h2>Contact Us</h2>
+        <p>Reach out for enquiries, orders, or delivery arrangements.</p>
+        <p>Visit us for spare parts, quotes, delivery support, and workshop-ready recommendations.</p>
+          
+        <ul>
+          <li>📍 Mvog-Ada, Yaoundé, Cameroon</li>
+          <li>📞 Phone: +234 916 228 7868</li>
+          <li>✉️ Email: info@armyofgodauto.cm</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Army of God Automobile. All rights reserved.</p>
+  </footer>
+</div>
+
+<!-- WHATSAPP BUTTON -->
+<a href="https://wa.me/2349162287868?text=Hello%20Army%20of%20God%20Automobile%20!%20I%20am%20interested%20in%20your%20services" target="_blank" class="whatsapp-btn" title="Chat on WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004c-1.325 0-2.651-.398-3.798-1.15l-.270-.167-2.755.723.738-2.68-.173-.275C2.71 4.5 2.313 3.214 2.313 1.93 2.313.588 3.46.001 4.794.001h.014C7.145.001 9.428 1.147 10.487 3.127c.566 1.049.862 2.217.862 3.379 0 1.341-.505 2.597-1.425 3.694-.923 1.1-2.275 1.862-3.746 2.154-1.37.266-2.77.087-4.065-.535l-.273-.157-2.755.723.738-2.68-.173-.275zm8.386-5.694c1.305.316 2.467 1.106 3.228 2.174.761 1.069 1.147 2.347 1.147 3.695 0 1.34-.505 2.597-1.425 3.694-.923 1.1-2.275 1.862-3.746 2.154-1.37.266-2.77.087-4.065-.535l-.273-.157-2.755.723.738-2.68-.173-.275C2.71 4.5 2.313 3.214 2.313 1.93"/>
+  </svg>
+</a>
+
+
+
+</body>
+</html>

@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Booking System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .role-selector {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .role-selector h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .role-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .role-btn {
+            padding: 12px 30px;
+            font-size: 1em;
+            border: 2px solid white;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .role-btn:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-2px);
+        }
+
+        .role-btn.active {
+            background: white;
+            color: #667eea;
+        }
+
+        .main-content {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #ddd;
+            gap: 0;
+        }
+
+        nav button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: #f8f9fa;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: #333;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav button:hover {
+            background: #e9ecef;
+            color: #667eea;
+        }
+
+        nav button.active {
+            background: white;
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-row.three-col {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+            padding: 8px 15px;
+            font-size: 0.9em;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        .btn-warning {
+            background: #f39c12;
+            color: white;
+            padding: 8px 15px;
+            font-size: 0.9em;
+        }
+
+        .btn-warning:hover {
+            background: #d68910;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        thead {
+            background: #f8f9fa;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #ddd;
+            color: #333;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeeba;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5em;
+            margin: 10px 0;
+        }
+
+        .stat-card p {
+            opacity: 0.9;
+        }
+
+        .card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .card h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .time-slot {
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .time-slot:hover {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .time-slot.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .time-slot.booked {
+            background: #e74c3c;
+            color: white;
+            border-color: #e74c3c;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .calendar-day {
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .calendar-day:hover {
+            border-color: #667eea;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+        }
+
+        .calendar-day.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .calendar-day.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #eee;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .service-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .service-card.selected {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .service-card h4 {
+            margin-bottom: 10px;
+        }
+
+        .service-card .price {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .service-card.selected .price {
+            color: white;
+        }
+
+        .service-card .duration {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        .provider-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .provider-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .provider-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .provider-card h4 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .provider-card .info {
+            font-size: 0.9em;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-style: italic;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .modal-close {
+            float: right;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .status-cancelled {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #27ae60;
+        }
+
+        .summary h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-row strong {
+            color: #333;
+        }
+
+        .summary-row .value {
+            color: #667eea;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row.three-col {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            nav button {
+                border-bottom: none;
+                border-left: 3px solid transparent;
+            }
+
+            nav button.active {
+                border-left-color: #667eea;
+                border-bottom: none;
+            }
+
+            .role-buttons {
+                flex-direction: column;
+            }
+
+            .role-btn {
+                width: 100%;
+            }
+
+            .calendar {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .provider-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="role-selector">
+            <h1>📅 Online Booking System</h1>
+            <p style="margin-bottom: 20px; font-size: 1.1em;">Choose your role to get started</p>
+            <div class="role-buttons">
+                <button class="role-btn active" data-role="provider">Service Provider</button>
+                <button class="role-btn" data-role="customer">Customer</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <!-- PROVIDER SECTION -->
+            <div id="provider-section" class="role-section active">
+                <div class="header">
+                    <h2>Service Provider Dashboard</h2>
+                    <p>Manage your services and bookings</p>
+                </div>
+
+                <nav>
+                    <button class="nav-btn active" data-section="provider-profile">My Profile</button>
+                    <button class="nav-btn" data-section="services">Services</button>
+                    <button class="nav-btn" data-section="availability">Availability</button>
+                    <button class="nav-btn" data-section="provider-bookings">Bookings</button>
+                </nav>
+
+                <div class="content">
+                    <div id="alert" class="alert"></div>
+
+                    <!-- Provider Profile -->
+                    <div id="provider-profile" class="section active">
+                        <h2>My Business Profile</h2>
+                        <form id="providerForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Business Name</label>
+                                    <input type="text" id="businessName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Business Type</label>
+                                    <select id="businessType" required>
+                                        <option value="">Select Type</option>
+                                        <option value="Barber">Barber Shop</option>
+                                        <option value="Salon">Salon</option>
+                                        <option value="Consultant">Consultant</option>
+                                        <option value="Photographer">Photographer</option>
+                                        <option value="Clinic">Clinic</option>
+                                         <option value="Other">MakeUp Artist</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    <input type="email" id="providerEmail" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Phone</label>
+                                    <input type="tel" id="providerPhone" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Address</label>
+                                <input type="text" id="providerAddress" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea id="providerDescription" rows="4" placeholder="Describe your business..."></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Working Hours (From)</label>
+                                    <input type="time" id="workingFrom" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Working Hours (To)</label>
+                                    <input type="time" id="workingTo" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary">Save Profile</button>
+                        </form>
+                    </div>
+
+                    <!-- Services -->
+                    <div id="services" class="section">
+                        <h2>Manage Services</h2>
+                        <form id="serviceForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Service Name</label>
+                                    <input type="text" id="serviceName" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Price ($)</label>
+                                    <input type="number" id="servicePrice" step="0.01" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Duration (minutes)</label>
+                                    <input type="number" id="serviceDuration" min="15" step="15" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Capacity (per slot)</label>
+                                    <input type="number" id="serviceCapacity" min="1" value="1" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea id="serviceDescription" rows="3" placeholder="Service details..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">Add Service</button>
+                        </form>
+
+                        <h3 style="margin-top: 30px;">Your Services</h3>
+                        <div id="servicesList"></div>
+                    </div>
+
+                    <!-- Availability -->
+                    <div id="availability" class="section">
+                        <h2>Set Availability</h2>
+                        <form id="availabilityForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <input type="date" id="availabilityDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Time From</label>
+                                    <input type="time" id="availabilityFrom" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Time To</label>
+                                    <input type="time" id="availabilityTo" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-primary">Add Availability</button>
+                        </form>
+
+                        <h3 style="margin-top: 30px;">Availability Calendar</h3>
+                        <div id="availabilityList"></div>
+                    </div>
+
+                    <!-- Bookings -->
+                    <div id="provider-bookings" class="section">
+                        <h2>Manage Bookings</h2>
+                        <div class="stats">
+                            <div class="stat-card">
+                                <p>Total Bookings</p>
+                                <h3 id="providerTotalBookings">0</h3>
+                            </div>
+                            <div class="stat-card">
+                                <p>Confirmed</p>
+                                <h3 id="providerConfirmed">0</h3>
+                            </div>
+                            <div class="stat-card">
+                                <p>Pending</p>
+                                <h3 id="providerPending">0</h3>
+                            </div>
+                            <div class="stat-card">
+                                <p>Total Revenue</p>
+                                <h3 id="providerRevenue">$0</h3>
+                            </div>
+                        </div>
+                        <div id="providerBookingsList"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CUSTOMER SECTION -->
+            <div id="customer-section" class="role-section" style="display: none;">
+                <div class="header">
+                    <h2>Book Your Service</h2>
+                    <p>Find and book your favorite service provider</p>
+                </div>
+
+                <nav>
+                    <button class="nav-btn active" data-section="browse">Browse Services</button>
+                    <button class="nav-btn" data-section="my-bookings">My Bookings</button>
+                </nav>
+
+                <div class="content">
+                    <div id="alert" class="alert"></div>
+
+                    <!-- Browse Services -->
+                    <div id="browse" class="section active">
+                        <h2>Find a Service</h2>
+                        <div class="form-row" style="margin-bottom: 20px;">
+                            <div class="form-group">
+                                <label>Service Type</label>
+                                <select id="serviceTypeFilter">
+                                    <option value="">All Types</option>
+                                    <option value="Barber">Barber Shop</option>
+                                    <option value="Salon">Salon</option>
+                                    <option value="Consultant">Consultant</option>
+                                    <option value="Photographer">Photographer</option>
+                                    <option value="Clinic">Clinic</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h3>Available Providers</h3>
+                        <div id="providersList" class="provider-grid"></div>
+                    </div>
+
+                    <!-- My Bookings -->
+                    <div id="my-bookings" class="section">
+                        <h2>My Bookings</h2>
+                        <div id="customerBookingsList"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">Book Appointment</div>
+            
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label>Select Service</label>
+                    <div id="modalServices" class="services-grid"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Date</label>
+                    <div id="modalDates" class="calendar"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Time</label>
+                    <div id="modalTimes" class="time-slots"></div>
+                </div>
+
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" id="customerName" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="customerEmail" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel" id="customerPhone" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Additional Notes</label>
+                    <textarea id="bookingNotes" rows="3" placeholder="Any special requests..."></textarea>
+                </div>
+
+                <div class="summary" id="bookingSummary" style="display: none;"></div>
+
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button type="button" class="btn-secondary" id="closeBooking">Cancel</button>
+                    <button type="submit" class="btn-primary">Confirm Booking</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-header">Confirm Delete</div>
+            <p>Are you sure you want to delete this item?</p>
+            <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end;">
+                <button class="btn-secondary" id="cancelDelete">Cancel</button>
+                <button class="btn-danger" id="confirmDelete">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data Storage
+        const data = {
+            provider: JSON.parse(localStorage.getItem('provider')) || null,
+            services: JSON.parse(localStorage.getItem('services')) || [],
+            availability: JSON.parse(localStorage.getItem('availability')) || [],
+            bookings: JSON.parse(localStorage.getItem('bookings')) || [],
+            providers: JSON.parse(localStorage.getItem('providers')) || []
+        };
+
+        let currentRole = 'provider';
+        let currentProviderId = null;
+        let deleteCallback = null;
+        let selectedServiceId = null;
+        let selectedDate = null;
+        let selectedTime = null;
+
+        // Role Selection
+        document.querySelectorAll('.role-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.role-section').forEach(s => s.style.display = 'none');
+                e.target.classList.add('active');
+                currentRole = e.target.dataset.role;
+                document.getElementById(currentRole + '-section').style.display = 'block';
+                if (currentRole === 'customer') {
+                    displayProviders();
+                } else {
+                    if (data.provider) {
+                        displayServices();
+                        displayAvailability();
+                        displayProviderBookings();
+                    }
+                }
+            });
+        });
+
+        // Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const container = e.target.parentElement.nextElementSibling;
+                container.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                container.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                e.target.classList.add('active');
+                document.getElementById(e.target.dataset.section).classList.add('active');
+            });
+        });
+
+        // Alert Function
+        function showAlert(message, type = 'success') {
+            const alert = document.getElementById('alert');
+            alert.textContent = message;
+            alert.className = `alert show alert-${type}`;
+            setTimeout(() => alert.classList.remove('show'), 3000);
+        }
+
+        // Save to Local Storage
+        function saveData() {
+            localStorage.setItem('provider', JSON.stringify(data.provider));
+            localStorage.setItem('services', JSON.stringify(data.services));
+            localStorage.setItem('availability', JSON.stringify(data.availability));
+            localStorage.setItem('bookings', JSON.stringify(data.bookings));
+            localStorage.setItem('providers', JSON.stringify(data.providers));
+        }
+
+        // PROVIDER FUNCTIONS
+        document.getElementById('providerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            data.provider = {
+                id: data.provider?.id || Date.now(),
+                businessName: document.getElementById('businessName').value,
+                businessType: document.getElementById('businessType').value,
+                email: document.getElementById('providerEmail').value,
+                phone: document.getElementById('providerPhone').value,
+                address: document.getElementById('providerAddress').value,
+                description: document.getElementById('providerDescription').value,
+                workingFrom: document.getElementById('workingFrom').value,
+                workingTo: document.getElementById('workingTo').value,
+                createdAt: data.provider?.createdAt || new Date().toISOString()
+            };
+
+            // Add to providers list if new
+            if (!data.providers.find(p => p.id === data.provider.id)) {
+                data.providers.push(data.provider);
+            } else {
+                data.providers = data.providers.map(p => p.id === data.provider.id ? data.provider : p);
+            }
+
+            currentProviderId = data.provider.id;
+            saveData();
+            showAlert('Profile saved successfully!');
+            populateProviderForm();
+        });
+
+        function populateProviderForm() {
+            if (data.provider) {
+                document.getElementById('businessName').value = data.provider.businessName;
+                document.getElementById('businessType').value = data.provider.businessType;
+                document.getElementById('providerEmail').value = data.provider.email;
+                document.getElementById('providerPhone').value = data.provider.phone;
+                document.getElementById('providerAddress').value = data.provider.address;
+                document.getElementById('providerDescription').value = data.provider.description;
+                document.getElementById('workingFrom').value = data.provider.workingFrom;
+                document.getElementById('workingTo').value = data.provider.workingTo;
+            }
+        }
+
+        // Services
+        document.getElementById('serviceForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!data.provider) {
+                showAlert('Please create your profile first!', 'error');
+                return;
+            }
+
+            const service = {
+                id: Date.now(),
+                providerId: data.provider.id,
+                name: document.getElementById('serviceName').value,
+                price: parseFloat(document.getElementById('servicePrice').value),
+                duration: parseInt(document.getElementById('serviceDuration').value),
+                capacity: parseInt(document.getElementById('serviceCapacity').value),
+                description: document.getElementById('serviceDescription').value
+            };
+            data.services.push(service);
+            saveData();
+            displayServices();
+            document.getElementById('serviceForm').reset();
+            showAlert('Service added successfully!');
+        });
+
+        function displayServices() {
+            const list = document.getElementById('servicesList');
+            const myServices = data.services.filter(s => s.providerId === data.provider?.id);
+            
+            if (myServices.length === 0) {
+                list.innerHTML = '<div class="no-data">No services added yet.</div>';
+                return;
+            }
+
+            let html = '<table><thead><tr><th>Service Name</th><th>Price</th><th>Duration</th><th>Capacity</th><th>Action</th></tr></thead><tbody>';
+            myServices.forEach(service => {
+                html += `<tr>
+                    <td>${service.name}</td>
+                    <td>$${service.price.toFixed(2)}</td>
+                    <td>${service.duration} min</td>
+                    <td>${service.capacity} person(s)</td>
+                    <td><button class="btn-danger" onclick="deleteService(${service.id})">Delete</button></td>
+                </tr>`;
+            });
+            html += '</tbody></table>';
+            list.innerHTML = html;
+        }
+
+        function deleteService(id) {
+            deleteCallback = () => {
+                data.services = data.services.filter(s => s.id !== id);
+                saveData();
+                displayServices();
+                showAlert('Service deleted successfully!');
+            };
+            document.getElementById('deleteModal').classList.add('show');
+        }
+
+        // Availability
+        document.getElementById('availabilityForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!data.provider) {
+                showAlert('Please create your profile first!', 'error');
+                return;
+            }
+
+            const availability = {
+                id: Date.now(),
+                providerId: data.provider.id,
+                date: document.getElementById('availabilityDate').value,
+                from: document.getElementById('availabilityFrom').value,
+                to: document.getElementById('availabilityTo').value
+            };
+            data.availability.push(availability);
+            saveData();
+            displayAvailability();
+            document.getElementById('availabilityForm').reset();
+            showAlert('Availability added successfully!');
+        });
+
+        function displayAvailability() {
+            const list = document.getElementById('availabilityList');
+            const myAvailability = data.availability.filter(a => a.providerId === data.provider?.id);
+            
+            if (myAvailability.length === 0) {
+                list.innerHTML = '<div class="no-data">No availability set yet.</div>';
+                return;
+            }
+
+            let html = '<table><thead><tr><th>Date</th><th>Time</th><th>Action</th></tr></thead><tbody>';
+            myAvailability.forEach(avail => {
+                html += `<tr>
+                    <td>${avail.date}</td>
+                    <td>${avail.from} - ${avail.to}</td>
+                    <td><button class="btn-danger" onclick="deleteAvailability(${avail.id})">Delete</button></td>
+                </tr>`;
+            });
+            html += '</tbody></table>';
+            list.innerHTML = html;
+        }
+
+        function deleteAvailability(id) {
+            deleteCallback = () => {
+                data.availability = data.availability.filter(a => a.id !== id);
+                saveData();
+                displayAvailability();
+                showAlert('Availability deleted successfully!');
+            };
+            document.getElementById('deleteModal').classList.add('show');
+        }
+
+        // Provider Bookings
+        function displayProviderBookings() {
+            const list = document.getElementById('providerBookingsList');
+            const myBookings = data.bookings.filter(b => b.providerId === data.provider?.id);
+
+            const total = myBookings.length;
+            const confirmed = myBookings.filter(b => b.status === 'confirmed').length;
+            const pending = myBookings.filter(b => b.status === 'pending').length;
+            const revenue = myBookings.filter(b => b.status === 'confirmed').reduce((sum, b) => sum + b.amount, 0);
+
+            document.getElementById('providerTotalBookings').textContent = total;
+            document.getElementById('providerConfirmed').textContent = confirmed;
+            document.getElementById('providerPending').textContent = pending;
+            document.getElementById('providerRevenue').textContent = `$${revenue.toFixed(2)}`;
+
+            if (myBookings.length === 0) {
+                list.innerHTML = '<div class="no-data">No bookings yet.</div>';
+                return;
+            }
+
+            let html = '<table><thead><tr><th>Customer</th><th>Service</th><th>Date & Time</th><th>Amount</th><th>Status</th><th>Action</th></tr></thead><tbody>';
+            myBookings.forEach(booking => {
+                const service = data.services.find(s => s.id == booking.serviceId);
+                const statusClass = `status-${booking.status}`;
+                html += `<tr>
+                    <td>${booking.customerName}</td>
+                    <td>${service?.name || 'Unknown'}</td>
+                    <td>${booking.date} ${booking.time}</td>
+                    <td>$${booking.amount.toFixed(2)}</td>
+                    <td><span class="status-badge ${statusClass}">${booking.status.toUpperCase()}</span></td>
+                    <td>
+                        ${booking.status === 'pending' ? `<button class="btn-success" onclick="confirmBooking(${booking.id})">Confirm</button>` : ''}
+                        <button class="btn-danger" onclick="cancelBooking(${booking.id})">Cancel</button>
+                    </td>
+                </tr>`;
+            });
+            html += '</tbody></table>';
+            list.innerHTML = html;
+        }
+
+        function confirmBooking(id) {
+            const booking = data.bookings.find(b => b.id === id);
+            if (booking) {
+                booking.status = 'confirmed';
+                saveData();
+                displayProviderBookings();
+                showAlert('Booking confirmed!');
+            }
+        }
+
+        function cancelBooking(id) {
+            deleteCallback = () => {
+                const booking = data.bookings.find(b => b.id === id);
+                if (booking) {
+                    booking.status = 'cancelled';
+                    saveData();
+                    displayProviderBookings();
+                    showAlert('Booking cancelled!');
+                }
+            };
+            document.getElementById('deleteModal').classList.add('show');
+        }
+
+        // CUSTOMER FUNCTIONS
+        function displayProviders() {
+            const list = document.getElementById('providersList');
+            const typeFilter = document.getElementById('serviceTypeFilter').value;
+
+            let providers = data.providers;
+            if (typeFilter) {
+                providers = providers.filter(p => p.businessType === typeFilter);
+            }
+
+            if (providers.length === 0) {
+                list.innerHTML = '<div class="no-data">No providers found.</div>';
+                return;
+            }
+
+            let html = '';
+            providers.forEach(provider => {
+                const providerServices = data.services.filter(s => s.providerId === provider.id);
+                html += `<div class="provider-card">
+                    <h4>${provider.businessName}</h4>
+                    <div class="info">
+                        <p><strong>Type:</strong> ${provider.businessType}</p>
+                        <p><strong>Location:</strong> ${provider.address}</p>
+                        <p><strong>Hours:</strong> ${provider.workingFrom} - ${provider.workingTo}</p>
+                        <p><strong>Services:</strong> ${providerServices.length}</p>
+                        <p style="margin-top: 10px;">${provider.description}</p>
+                    </div>
+                    <button class="btn-primary" style="width: 100%; margin-top: 15px;" onclick="openBookingModal(${provider.id})">Book Now</button>
+                </div>`;
+            });
+            list.innerHTML = html;
+        }
+
+        document.getElementById('serviceTypeFilter').addEventListener('change', displayProviders);
+
+        // Booking Modal
+        function openBookingModal(providerId) {
+            currentProviderId = providerId;
+            const provider = data.providers.find(p => p.id === providerId);
+            const services = data.services.filter(s => s.providerId === providerId);
+
+            // Populate services
+            let servicesHtml = '';
+            services.forEach(service => {
+                servicesHtml += `<div class="service-card" onclick="selectService(${service.id})">
+                    <h4>${service.name}</h4>
+                    <div class="price">$${service.price.toFixed(2)}</div>
+                    <div class="duration">${service.duration} minutes</div>
+                </div>`;
+            });
+            document.getElementById('modalServices').innerHTML = servicesHtml;
+
+            // Populate dates (next 30 days)
+            let datesHtml = '';
+            for (let i = 0; i < 30; i++) {
+                const date = new Date();
+                date.setDate(date.getDate() + i);
+                const dateStr = date.toISOString().split('T')[0];
+                const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+                datesHtml += `<div class="calendar-day" onclick="selectDate('${dateStr}')">${dayName}<br>${date.getDate()}</div>`;
+            }
+            document.getElementById('modalDates').innerHTML = datesHtml;
+
+            document.getElementById('bookingModal').classList.add('show');
+            selectedServiceId = null;
+            selectedDate = null;
+            selectedTime = null;
+        }
+
+        function selectService(serviceId) {
+            selectedServiceId = serviceId;
+            document.querySelectorAll('#modalServices .service-card').forEach(card => card.classList.remove('selected'));
+            event.target.closest('.service-card').classList.add('selected');
+            updateBookingSummary();
+        }
+
+        function selectDate(date) {
+            selectedDate = date;
+            document.querySelectorAll('#modalDates .calendar-day').forEach(day => day.classList.remove('selected'));
+            event.target.closest('.calendar-day').classList.add('selected');
+
+            // Load available times
+            const availability = data.availability.filter(a => a.providerId === currentProviderId && a.date === date);
+            let timesHtml = '';
+
+            if (availability.length === 0) {
+                timesHtml = '<div class="no-data">No availability on this date.</div>';
+            } else {
+                availability.forEach(avail => {
+                    const [fromHour, fromMin] = avail.from.split(':');
+                    const [toHour, toMin] = avail.to.split(':');
+                    const from = parseInt(fromHour) * 60 + parseInt(fromMin);
+                    const to = parseInt(toHour) * 60 + parseInt(toMin);
+
+                    for (let time = from; time < to; time += 30) {
+                        const hour = Math.floor(time / 60);
+                        const min = time % 60;
+                        const timeStr = `${String(hour).padStart(2, '0')}:${String(min).padStart(2, '0')}`;
+
+                        // Check if slot is booked
+                        const isBooked = data.bookings.some(b => 
+                            b.providerId === currentProviderId && 
+                            b.date === date && 
+                            b.time === timeStr &&
+                            b.status !== 'cancelled'
+                        );
+
+                        const className = isBooked ? 'booked' : '';
+                        const disabled = isBooked ? 'onclick="return false;"' : `onclick="selectTime('${timeStr}')"`;
+                        timesHtml += `<div class="time-slot ${className}" ${disabled}>${timeStr}</div>`;
+                    }
+                });
+            }
+
+            document.getElementById('modalTimes').innerHTML = timesHtml;
+            updateBookingSummary();
+        }
+
+        function selectTime(time) {
+            selectedTime = time;
+            document.querySelectorAll('#modalTimes .time-slot').forEach(slot => slot.classList.remove('selected'));
+            event.target.classList.add('selected');
+            updateBookingSummary();
+        }
+
+        function updateBookingSummary() {
+            const summary = document.getElementById('bookingSummary');
+            if (!selectedServiceId || !selectedDate || !selectedTime) {
+                summary.style.display = 'none';
+                return;
+            }
+
+            const service = data.services.find(s => s.id === selectedServiceId);
+            const provider = data.providers.find(p => p.id === currentProviderId);
+
+            let html = `
+                <h3>Booking Summary</h3>
+                <div class="summary-row">
+                    <strong>Provider:</strong>
+                    <span class="value">${provider.businessName}</span>
+                </div>
+                <div class="summary-row">
+                    <strong>Service:</strong>
+                    <span class="value">${service.name}</span>
+                </div>
+                <div class="summary-row">
+                    <strong>Date:</strong>
+                    <span class="value">${selectedDate}</span>
+                </div>
+                <div class="summary-row">
+                    <strong>Time:</strong>
+                    <span class="value">${selectedTime}</span>
+                </div>
+                <div class="summary-row">
+                    <strong>Duration:</strong>
+                    <span class="value">${service.duration} minutes</span>
+                </div>
+                <div class="summary-row" style="font-size: 1.1em;">
+                    <strong>Total Amount:</strong>
+                    <span class="value">$${service.price.toFixed(2)}</span>
+                </div>
+            `;
+            summary.innerHTML = html;
+            summary.style.display = 'block';
+        }
+
+        document.getElementById('bookingForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!selectedServiceId || !selectedDate || !selectedTime) {
+                showAlert('Please select service, date, and time!', 'error');
+                return;
+            }
+
+            const service = data.services.find(s => s.id === selectedServiceId);
+            const booking = {
+                id: Date.now(),
+                providerId: currentProviderId,
+                serviceId: selectedServiceId,
+                customerName: document.getElementById('customerName').value,
+                customerEmail: document.getElementById('customerEmail').value,
+                customerPhone: document.getElementById('customerPhone').value,
+                date: selectedDate,
+                time: selectedTime,
+                notes: document.getElementById('bookingNotes').value,
+                amount: service.price,
+                status: 'pending',
+                bookedAt: new Date().toISOString()
+            };
+
+            data.bookings.push(booking);
+            saveData();
+            document.getElementById('bookingModal').classList.remove('show');
+            document.getElementById('bookingForm').reset();
+            displayProviders();
+            displayCustomerBookings();
+            showAlert('Booking request sent! Waiting for provider confirmation.', 'success');
+        });
+
+        function displayCustomerBookings() {
+            const list = document.getElementById('customerBookingsList');
+            if (data.bookings.length === 0) {
+                list.innerHTML = '<div class="no-data">No bookings yet.</div>';
+                return;
+            }
+
+            let html = '';
+            data.bookings.forEach(booking => {
+                const provider = data.providers.find(p => p.id === booking.providerId);
+                const service = data.services.find(s => s.id === booking.serviceId);
+                const statusClass = `status-${booking.status}`;
+                
+                html += `<div class="card">
+                    <h4>${provider?.businessName || 'Unknown Provider'}</h4>
+                    <div style="margin: 10px 0;">
+                        <p><strong>Service:</strong> ${service?.name || 'Unknown'}</p>
+                        <p><strong>Date & Time:</strong> ${booking.date} at ${booking.time}</p>
+                        <p><strong>Amount:</strong> $${booking.amount.toFixed(2)}</p>
+                        <p style="margin-top: 10px;"><strong>Status:</strong> <span class="status-badge ${statusClass}">${booking.status.toUpperCase()}</span></p>
+                    </div>
+                    ${booking.status === 'pending' ? `<button class="btn-danger" onclick="cancelCustomerBooking(${booking.id})">Cancel Request</button>` : ''}
+                </div>`;
+            });
+            list.innerHTML = html;
+        }
+
+        function cancelCustomerBooking(id) {
+            deleteCallback = () => {
+                const booking = data.bookings.find(b => b.id === id);
+                if (booking) {
+                    booking.status = 'cancelled';
+                    saveData();
+                    displayCustomerBookings();
+                    showAlert('Booking cancelled!');
+                }
+            };
+            document.getElementById('deleteModal').classList.add('show');
+        }
+
+        // Modal Controls
+        document.querySelectorAll('.modal-close').forEach(close => {
+            close.addEventListener('click', () => {
+                close.closest('.modal').classList.remove('show');
+            });
+        });
+
+        document.getElementById('closeBooking').addEventListener('click', () => {
+            document.getElementById('bookingModal').classList.remove('show');
+        });
+
+        document.getElementById('cancelDelete').addEventListener('click', () => {
+            document.getElementById('deleteModal').classList.remove('show');
+        });
+
+        document.getElementById('confirmDelete').addEventListener('click', () => {
+            if (deleteCallback) {
+                deleteCallback();
+            }
+            document.getElementById('deleteModal').classList.remove('show');
+        });
+
+        // Initial Load
+        populateProviderForm();
+    </script>
+</body>
+</html>

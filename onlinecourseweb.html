@@ -1,0 +1,1606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Learning Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .role-selector {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .role-selector h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .role-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .role-btn {
+            padding: 12px 30px;
+            font-size: 1em;
+            border: 2px solid #667eea;
+            background: white;
+            color: #667eea;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .role-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .role-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        nav {
+            display: flex;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+            gap: 0;
+        }
+
+        nav button {
+            flex: 1;
+            padding: 15px;
+            border: none;
+            background: white;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: #333;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav button:hover {
+            background: #f8f9fa;
+            color: #667eea;
+        }
+
+        nav button.active {
+            background: white;
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .content {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+            font-family: inherit;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-row.three-col {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        button {
+            padding: 12px 24px;
+            font-size: 1em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-danger {
+            background: #e74c3c;
+            color: white;
+            padding: 8px 15px;
+            font-size: 0.9em;
+        }
+
+        .btn-danger:hover {
+            background: #c0392b;
+        }
+
+        .btn-success {
+            background: #27ae60;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #229954;
+        }
+
+        .btn-small {
+            padding: 8px 15px;
+            font-size: 0.9em;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert.show {
+            display: block;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+
+        .stat-card h3 {
+            font-size: 2.5em;
+            margin: 10px 0;
+        }
+
+        .stat-card p {
+            opacity: 0.9;
+            font-size: 0.9em;
+        }
+
+        .course-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #ddd;
+        }
+
+        .course-card:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .course-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .course-title {
+            font-size: 1.2em;
+            font-weight: 600;
+        }
+
+        .course-meta {
+            font-size: 0.85em;
+            opacity: 0.9;
+        }
+
+        .course-content {
+            padding: 20px;
+        }
+
+        .course-description {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .course-stats {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #666;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .course-stat {
+            flex: 1;
+            text-align: center;
+        }
+
+        .course-stat .value {
+            font-weight: bold;
+            color: #667eea;
+            display: block;
+        }
+
+        .course-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .course-actions button {
+            flex: 1;
+            padding: 10px;
+            font-size: 0.9em;
+        }
+
+        .material-list {
+            margin-top: 20px;
+        }
+
+        .material-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .material-info {
+            flex: 1;
+        }
+
+        .material-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .material-meta {
+            font-size: 0.85em;
+            color: #999;
+        }
+
+        .material-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .quiz-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .quiz-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .quiz-meta {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .quiz-questions {
+            margin-top: 20px;
+        }
+
+        .question-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 3px solid #667eea;
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .question-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .question-option {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .question-option:hover {
+            border-color: #667eea;
+            background: #f8f9fa;
+        }
+
+        .question-option input[type="radio"],
+        .question-option input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .file-upload {
+            border: 2px dashed #667eea;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 15px 0;
+        }
+
+        .file-upload:hover {
+            background: #f8f9fa;
+            border-color: #764ba2;
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        thead {
+            background: #f8f9fa;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #ddd;
+            color: #333;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #667eea;
+            transition: width 0.3s ease;
+        }
+
+        .result-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #27ae60;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .score-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 20px auto;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .modal-close {
+            float: right;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .modal-close:hover {
+            color: #333;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-style: italic;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row.three-col {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-direction: column;
+            }
+
+            nav button {
+                border-bottom: none;
+                border-left: 3px solid transparent;
+            }
+
+            nav button.active {
+                border-left-color: #667eea;
+                border-bottom: none;
+            }
+
+            .course-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="role-selector">
+            <h1>📚 Online Learning Platform</h1>
+            <p style="margin-bottom: 20px; color: #666;">Share knowledge and learn with quizzes and materials</p>
+            <div class="role-buttons">
+                <button class="role-btn active" data-role="tutor">Tutor</button>
+                <button class="role-btn" data-role="student">Student</button>
+            </div>
+        </div>
+
+        <!-- TUTOR SECTION -->
+        <div id="tutor-section" class="role-section active">
+            <div class="header">
+                <h2>👨‍🏫 Tutor Dashboard</h2>
+                <p>Create courses, upload materials, and manage quizzes</p>
+            </div>
+
+            <nav>
+                <button class="nav-btn active" data-section="tutor-dashboard">Dashboard</button>
+                <button class="nav-btn" data-section="create-course">Create Course</button>
+                <button class="nav-btn" data-section="my-courses">My Courses</button>
+                <button class="nav-btn" data-section="upload-materials">Upload Materials</button>
+                <button class="nav-btn" data-section="create-quiz">Create Quiz</button>
+                <button class="nav-btn" data-section="results">Results</button>
+            </nav>
+
+            <div class="content">
+                <div id="alert" class="alert"></div>
+
+                <!-- Dashboard -->
+                <div id="tutor-dashboard" class="section active">
+                    <h2>Dashboard Overview</h2>
+                    <div class="stats">
+                        <div class="stat-card">
+                            <p>Total Courses</p>
+                            <h3 id="tutorTotalCourses">0</h3>
+                        </div>
+                        <div class="stat-card">
+                            <p>Total Materials</p>
+                            <h3 id="tutorTotalMaterials">0</h3>
+                        </div>
+                        <div class="stat-card">
+                            <p>Total Quizzes</p>
+                            <h3 id="tutorTotalQuizzes">0</h3>
+                        </div>
+                        <div class="stat-card">
+                            <p>Total Students</p>
+                            <h3 id="tutorTotalStudents">0</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Create Course -->
+                <div id="create-course" class="section">
+                    <h2>Create New Course</h2>
+                    <form id="courseForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Course Title</label>
+                                <input type="text" id="courseTitle" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="courseCategory" required>
+                                    <option value="">Select Category</option>
+                                    <option value="Programming">Programming</option>
+                                    <option value="Mathematics">Mathematics</option>
+                                    <option value="Science">Science</option>
+                                    <option value="Languages">Languages</option>
+                                    <option value="Business">Business</option>
+                                    <option value="Design">Design</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Course Description</label>
+                            <textarea id="courseDescription" rows="4" placeholder="Describe what students will learn..."></textarea>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Difficulty Level</label>
+                                <select id="courseDifficulty" required>
+                                    <option value="">Select Level</option>
+                                    <option value="Beginner">Beginner</option>
+                                    <option value="Intermediate">Intermediate</option>
+                                    <option value="Advanced">Advanced</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Duration (hours)</label>
+                                <input type="number" id="courseDuration" min="1" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Create Course</button>
+                    </form>
+                </div>
+
+                <!-- My Courses -->
+                <div id="my-courses" class="section">
+                    <h2>My Courses</h2>
+                    <div id="tutorCoursesList"></div>
+                </div>
+
+                <!-- Upload Materials -->
+                <div id="upload-materials" class="section">
+                    <h2>Upload Learning Materials</h2>
+                    <form id="materialForm">
+                        <div class="form-group">
+                            <label>Select Course</label>
+                            <select id="materialCourse" required>
+                                <option value="">Select Course</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Material Title</label>
+                                <input type="text" id="materialTitle" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Material Type</label>
+                                <select id="materialType" required>
+                                    <option value="">Select Type</option>
+                                    <option value="PDF">PDF Document</option>
+                                    <option value="Video">Video Link</option>
+                                    <option value="Article">Article/Notes</option>
+                                    <option value="Presentation">Presentation</option>
+                                    <option value="Code">Code/Resources</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="materialDescription" rows="3" placeholder="Describe the material..."></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Upload File</label>
+                            <div class="file-upload" id="fileUpload">
+                                <p>📁 Click to upload or drag and drop</p>
+                                <input type="file" id="fileInput">
+                            </div>
+                            <div id="fileInfo"></div>
+                        </div>
+
+                        <button type="submit" class="btn-primary">Upload Material</button>
+                    </form>
+
+                    <h3 style="margin-top: 30px;">Course Materials</h3>
+                    <div id="materialsList"></div>
+                </div>
+
+                <!-- Create Quiz -->
+                <div id="create-quiz" class="section">
+                    <h2>Create Quiz</h2>
+                    <form id="quizForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Quiz Title</label>
+                                <input type="text" id="quizTitle" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Select Course</label>
+                                <select id="quizCourse" required>
+                                    <option value="">Select Course</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Quiz Type</label>
+                                <select id="quizType" required>
+                                    <option value="Multiple Choice">Multiple Choice</option>
+                                    <option value="Mixed">Multiple Choice & True/False</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Passing Score (%)</label>
+                                <input type="number" id="quizPassingScore" min="0" max="100" value="60" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Quiz Description</label>
+                            <textarea id="quizDescription" rows="3" placeholder="Describe the quiz..."></textarea>
+                        </div>
+
+                        <div id="questionsContainer"></div>
+
+                        <button type="button" class="btn-secondary" id="addQuestionBtn" style="margin-bottom: 20px;">+ Add Question</button>
+                        <button type="submit" class="btn-primary">Create Quiz</button>
+                    </form>
+
+                    <h3 style="margin-top: 30px;">My Quizzes</h3>
+                    <div id="tutorQuizzesList"></div>
+                </div>
+
+                <!-- Results -->
+                <div id="results" class="section">
+                    <h2>Student Results</h2>
+                    <div id="tutorResultsList"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STUDENT SECTION -->
+        <div id="student-section" class="role-section" style="display: none;">
+            <div class="header">
+                <h2>👨‍🎓 Student Dashboard</h2>
+                <p>Browse courses, learn from materials, and take quizzes</p>
+            </div>
+
+            <nav>
+                <button class="nav-btn active" data-section="browse-courses">Browse Courses</button>
+                <button class="nav-btn" data-section="enrolled-courses">My Courses</button>
+                <button class="nav-btn" data-section="available-quizzes">Quizzes</button>
+                <button class="nav-btn" data-section="my-results">My Results</button>
+            </nav>
+
+            <div class="content">
+                <div id="alert" class="alert"></div>
+
+                <!-- Browse Courses -->
+                <div id="browse-courses" class="section active">
+                    <h2>Available Courses</h2>
+                    <div class="course-grid" id="browseCoursesGrid"></div>
+                </div>
+
+                <!-- Enrolled Courses -->
+                <div id="enrolled-courses" class="section">
+                    <h2>My Enrolled Courses</h2>
+                    <div id="enrolledCoursesGrid"></div>
+                </div>
+
+                <!-- Available Quizzes -->
+                <div id="available-quizzes" class="section">
+                    <h2>Available Quizzes</h2>
+                    <div id="quizzesGrid"></div>
+                </div>
+
+                <!-- My Results -->
+                <div id="my-results" class="section">
+                    <h2>My Quiz Results</h2>
+                    <div id="studentResultsList"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz Taking Modal -->
+    <div id="quizModal" class="modal">
+        <div class="modal-content" style="max-width: 800px; max-height: 90vh; overflow-y: auto;">
+            <span class="modal-close">&times;</span>
+            <div id="quizContent"></div>
+        </div>
+    </div>
+
+    <!-- Course Details Modal -->
+    <div id="courseModal" class="modal">
+        <div class="modal-content" style="max-width: 700px; max-height: 90vh; overflow-y: auto;">
+            <span class="modal-close">&times;</span>
+            <div id="courseDetails"></div>
+        </div>
+    </div>
+
+    <script>
+        // Data Storage
+        const data = {
+            courses: JSON.parse(localStorage.getItem('courses')) || [],
+            materials: JSON.parse(localStorage.getItem('materials')) || [],
+            quizzes: JSON.parse(localStorage.getItem('quizzes')) || [],
+            enrollments: JSON.parse(localStorage.getItem('enrollments')) || [],
+            results: JSON.parse(localStorage.getItem('results')) || []
+        };
+
+        let currentRole = 'tutor';
+        let questionCount = 0;
+        let currentQuizId = null;
+        let currentCourseId = null;
+
+        // Role Selection
+        document.querySelectorAll('.role-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.role-section').forEach(s => s.style.display = 'none');
+                e.target.classList.add('active');
+                currentRole = e.target.dataset.role;
+                document.getElementById(currentRole + '-section').style.display = 'block';
+                if (currentRole === 'student') {
+                    displayBrowseCourses();
+                    displayEnrolledCourses();
+                    displayAvailableQuizzes();
+                    displayStudentResults();
+                } else {
+                    updateTutorDashboard();
+                    displayTutorCourses();
+                    displayMaterials();
+                    displayTutorQuizzes();
+                    displayTutorResults();
+                }
+            });
+        });
+
+        // Navigation
+        document.querySelectorAll('.nav-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const container = e.target.parentElement.nextElementSibling;
+                container.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                container.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                e.target.classList.add('active');
+                document.getElementById(e.target.dataset.section).classList.add('active');
+            });
+        });
+
+        // Alert Function
+        function showAlert(message, type = 'success') {
+            const alert = document.getElementById('alert');
+            alert.textContent = message;
+            alert.className = `alert show alert-${type}`;
+            setTimeout(() => alert.classList.remove('show'), 3000);
+        }
+
+        // Save to Local Storage
+        function saveData() {
+            localStorage.setItem('courses', JSON.stringify(data.courses));
+            localStorage.setItem('materials', JSON.stringify(data.materials));
+            localStorage.setItem('quizzes', JSON.stringify(data.quizzes));
+            localStorage.setItem('enrollments', JSON.stringify(data.enrollments));
+            localStorage.setItem('results', JSON.stringify(data.results));
+        }
+
+        // TUTOR FUNCTIONS
+        document.getElementById('courseForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const course = {
+                id: Date.now(),
+                title: document.getElementById('courseTitle').value,
+                category: document.getElementById('courseCategory').value,
+                description: document.getElementById('courseDescription').value,
+                difficulty: document.getElementById('courseDifficulty').value,
+                duration: parseInt(document.getElementById('courseDuration').value),
+                createdAt: new Date().toISOString()
+            };
+            data.courses.push(course);
+            saveData();
+            updateCourseSelects();
+            displayTutorCourses();
+            document.getElementById('courseForm').reset();
+            updateTutorDashboard();
+            showAlert('Course created successfully!');
+        });
+
+        function updateCourseSelects() {
+            const selects = [document.getElementById('materialCourse'), document.getElementById('quizCourse')];
+            selects.forEach(select => {
+                select.innerHTML = '<option value="">Select Course</option>';
+                data.courses.forEach(course => {
+                    select.innerHTML += `<option value="${course.id}">${course.title}</option>`;
+                });
+            });
+        }
+
+        function displayTutorCourses() {
+            const list = document.getElementById('tutorCoursesList');
+            if (data.courses.length === 0) {
+                list.innerHTML = '<div class="no-data">No courses created yet.</div>';
+                return;
+            }
+
+            let html = '<div class="course-grid">';
+            data.courses.forEach(course => {
+                const materials = data.materials.filter(m => m.courseId == course.id);
+                const quizzes = data.quizzes.filter(q => q.courseId == course.id);
+                html += `<div class="course-card">
+                    <div class="course-header">
+                        <div class="course-title">${course.title}</div>
+                        <div class="course-meta">${course.category}</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-description">${course.description}</div>
+                        <div class="course-stats">
+                            <div class="course-stat">
+                                <span class="value">${materials.length}</span>
+                                Materials
+                            </div>
+                            <div class="course-stat">
+                                <span class="value">${quizzes.length}</span>
+                                Quizzes
+                            </div>
+                            <div class="course-stat">
+                                <span class="value">${course.difficulty}</span>
+                                Level
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn-primary btn-small" onclick="editCourse(${course.id})">Edit</button>
+                            <button class="btn-danger btn-small" onclick="deleteCourse(${course.id})">Delete</button>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            html += '</div>';
+            list.innerHTML = html;
+        }
+
+        function deleteCourse(id) {
+            if (confirm('Delete this course and all its materials and quizzes?')) {
+                data.courses = data.courses.filter(c => c.id !== id);
+                data.materials = data.materials.filter(m => m.courseId !== id);
+                data.quizzes = data.quizzes.filter(q => q.courseId !== id);
+                saveData();
+                updateCourseSelects();
+                displayTutorCourses();
+                displayMaterials();
+                displayTutorQuizzes();
+                updateTutorDashboard();
+                showAlert('Course deleted!');
+            }
+        }
+
+        // Material Upload
+        document.getElementById('fileUpload').addEventListener('click', () => {
+            document.getElementById('fileInput').click();
+        });
+
+        document.getElementById('fileInput').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const fileInfo = document.getElementById('fileInfo');
+                fileInfo.innerHTML = `<p style="color: #667eea; margin-top: 10px;">📄 ${file.name} (${(file.size / 1024).toFixed(2)} KB)</p>`;
+            }
+        });
+
+        document.getElementById('materialForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const file = document.getElementById('fileInput').files[0];
+            if (!file) {
+                showAlert('Please select a file!', 'error');
+                return;
+            }
+
+            const material = {
+                id: Date.now(),
+                courseId: parseInt(document.getElementById('materialCourse').value),
+                title: document.getElementById('materialTitle').value,
+                type: document.getElementById('materialType').value,
+                description: document.getElementById('materialDescription').value,
+                fileName: file.name,
+                fileSize: (file.size / 1024).toFixed(2),
+                createdAt: new Date().toISOString()
+            };
+            data.materials.push(material);
+            saveData();
+            displayMaterials();
+            document.getElementById('materialForm').reset();
+            document.getElementById('fileInfo').innerHTML = '';
+            updateTutorDashboard();
+            showAlert('Material uploaded successfully!');
+        });
+
+        function displayMaterials() {
+            const list = document.getElementById('materialsList');
+            if (data.materials.length === 0) {
+                list.innerHTML = '<div class="no-data">No materials uploaded yet.</div>';
+                return;
+            }
+
+            let html = '';
+            data.materials.forEach(material => {
+                const course = data.courses.find(c => c.id == material.courseId);
+                html += `<div class="material-item">
+                    <div class="material-info">
+                        <div class="material-title">${material.title}</div>
+                        <div class="material-meta">
+                            Course: ${course?.title || 'Unknown'} | Type: ${material.type} | Size: ${material.fileSize} KB
+                        </div>
+                    </div>
+                    <div class="material-actions">
+                        <button class="btn-danger btn-small" onclick="deleteMaterial(${material.id})">Delete</button>
+                    </div>
+                </div>`;
+            });
+            list.innerHTML = html;
+        }
+
+        function deleteMaterial(id) {
+            if (confirm('Delete this material?')) {
+                data.materials = data.materials.filter(m => m.id !== id);
+                saveData();
+                displayMaterials();
+                updateTutorDashboard();
+                showAlert('Material deleted!');
+            }
+        }
+
+        // Quiz Creation
+        let questionCounter = 0;
+        document.getElementById('addQuestionBtn').addEventListener('click', () => {
+            const container = document.getElementById('questionsContainer');
+            const questionDiv = document.createElement('div');
+            questionDiv.className = 'question-item';
+            questionDiv.id = 'question-' + questionCounter;
+            questionDiv.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <label style="margin: 0;">Question ${questionCounter + 1}</label>
+                    <button type="button" class="btn-danger btn-small" onclick="removeQuestion(${questionCounter})">Remove</button>
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Enter question text..." class="question-text-${questionCounter}" rows="2"></textarea>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                    <input type="text" placeholder="Option A" class="option-a-${questionCounter}">
+                    <input type="text" placeholder="Option B" class="option-b-${questionCounter}">
+                    <input type="text" placeholder="Option C" class="option-c-${questionCounter}">
+                    <input type="text" placeholder="Option D" class="option-d-${questionCounter}">
+                </div>
+                <div class="form-group">
+                    <label>Correct Answer</label>
+                    <select class="correct-answer-${questionCounter}">
+                        <option value="">Select Correct Answer</option>
+                        <option value="A">Option A</option>
+                        <option value="B">Option B</option>
+                        <option value="C">Option C</option>
+                        <option value="D">Option D</option>
+                    </select>
+                </div>
+            `;
+            container.appendChild(questionDiv);
+            questionCounter++;
+        });
+
+        function removeQuestion(num) {
+            document.getElementById('question-' + num).remove();
+        }
+
+        document.getElementById('quizForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const questionElements = document.querySelectorAll('.question-item');
+            const questions = [];
+
+            questionElements.forEach((qEl, index) => {
+                const textArea = qEl.querySelector('textarea');
+                const optionInputs = qEl.querySelectorAll('input[type="text"]');
+                const selectAnswer = qEl.querySelector('select');
+
+                if (textArea.value && selectAnswer.value) {
+                    questions.push({
+                        text: textArea.value,
+                        options: {
+                            A: optionInputs[0].value,
+                            B: optionInputs[1].value,
+                            C: optionInputs[2].value,
+                            D: optionInputs[3].value
+                        },
+                        correctAnswer: selectAnswer.value
+                    });
+                }
+            });
+
+            if (questions.length === 0) {
+                showAlert('Add at least one question!', 'error');
+                return;
+            }
+
+            const quiz = {
+                id: Date.now(),
+                title: document.getElementById('quizTitle').value,
+                courseId: parseInt(document.getElementById('quizCourse').value),
+                type: document.getElementById('quizType').value,
+                passingScore: parseInt(document.getElementById('quizPassingScore').value),
+                description: document.getElementById('quizDescription').value,
+                questions: questions,
+                createdAt: new Date().toISOString()
+            };
+
+            data.quizzes.push(quiz);
+            saveData();
+            displayTutorQuizzes();
+            document.getElementById('quizForm').reset();
+            document.getElementById('questionsContainer').innerHTML = '';
+            questionCounter = 0;
+            updateTutorDashboard();
+            showAlert('Quiz created successfully!');
+        });
+
+        function displayTutorQuizzes() {
+            const list = document.getElementById('tutorQuizzesList');
+            if (data.quizzes.length === 0) {
+                list.innerHTML = '<div class="no-data">No quizzes created yet.</div>';
+                return;
+            }
+
+            let html = '';
+            data.quizzes.forEach(quiz => {
+                const course = data.courses.find(c => c.id == quiz.courseId);
+                html += `<div class="quiz-card">
+                    <div class="quiz-title">${quiz.title}</div>
+                    <div class="quiz-meta">
+                        Course: ${course?.title || 'Unknown'} | Questions: ${quiz.questions.length} | Passing: ${quiz.passingScore}%
+                    </div>
+                    <p style="color: #666; margin-top: 10px; font-size: 0.9em;">${quiz.description}</p>
+                    <button class="btn-danger btn-small" onclick="deleteQuiz(${quiz.id})" style="margin-top: 15px;">Delete</button>
+                </div>`;
+            });
+            list.innerHTML = html;
+        }
+
+        function deleteQuiz(id) {
+            if (confirm('Delete this quiz?')) {
+                data.quizzes = data.quizzes.filter(q => q.id !== id);
+                data.results = data.results.filter(r => r.quizId !== id);
+                saveData();
+                displayTutorQuizzes();
+                displayTutorResults();
+                updateTutorDashboard();
+                showAlert('Quiz deleted!');
+            }
+        }
+
+        function displayTutorResults() {
+            const list = document.getElementById('tutorResultsList');
+            if (data.results.length === 0) {
+                list.innerHTML = '<div class="no-data">No student results yet.</div>';
+                return;
+            }
+
+            let html = '<table><thead><tr><th>Student</th><th>Quiz</th><th>Score</th><th>Status</th><th>Date</th></tr></thead><tbody>';
+            data.results.forEach(result => {
+                const quiz = data.quizzes.find(q => q.id == result.quizId);
+                const status = result.score >= quiz.passingScore ? 'Passed' : 'Failed';
+                const statusClass = status === 'Passed' ? 'badge-success' : 'badge-warning';
+                html += `<tr>
+                    <td>${result.studentName}</td>
+                    <td>${quiz?.title || 'Unknown'}</td>
+                    <td>${result.score}%</td>
+                    <td><span class="badge ${statusClass}">${status}</span></td>
+                    <td>${new Date(result.date).toLocaleDateString()}</td>
+                </tr>`;
+            });
+            html += '</tbody></table>';
+            list.innerHTML = html;
+        }
+
+        function updateTutorDashboard() {
+            document.getElementById('tutorTotalCourses').textContent = data.courses.length;
+            document.getElementById('tutorTotalMaterials').textContent = data.materials.length;
+            document.getElementById('tutorTotalQuizzes').textContent = data.quizzes.length;
+            document.getElementById('tutorTotalStudents').textContent = new Set(data.enrollments.map(e => e.studentId)).size;
+        }
+
+        // STUDENT FUNCTIONS
+        function displayBrowseCourses() {
+            const grid = document.getElementById('browseCoursesGrid');
+            if (data.courses.length === 0) {
+                grid.innerHTML = '<div class="no-data">No courses available.</div>';
+                return;
+            }
+
+            let html = '';
+            data.courses.forEach(course => {
+                const materials = data.materials.filter(m => m.courseId == course.id);
+                const quizzes = data.quizzes.filter(q => q.courseId == course.id);
+                const enrolled = data.enrollments.some(e => e.courseId == course.id);
+
+                html += `<div class="course-card">
+                    <div class="course-header">
+                        <div class="course-title">${course.title}</div>
+                        <div class="course-meta">${course.category}</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-description">${course.description}</div>
+                        <div class="course-stats">
+                            <div class="course-stat">
+                                <span class="value">${materials.length}</span>
+                                Materials
+                            </div>
+                            <div class="course-stat">
+                                <span class="value">${quizzes.length}</span>
+                                Quizzes
+                            </div>
+                            <div class="course-stat">
+                                <span class="value">${course.difficulty}</span>
+                                Level
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            ${enrolled ? `<button class="btn-success btn-small">Enrolled</button>` : `<button class="btn-primary btn-small" onclick="enrollCourse(${course.id})">Enroll</button>`}
+                            <button class="btn-secondary btn-small" onclick="viewCourse(${course.id})">View</button>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = html;
+        }
+
+        function enrollCourse(courseId) {
+            const enrollment = {
+                id: Date.now(),
+                courseId: courseId,
+                studentId: 'student-' + Date.now(),
+                studentName: 'Student ' + Math.floor(Math.random() * 1000),
+                enrolledAt: new Date().toISOString()
+            };
+            data.enrollments.push(enrollment);
+            saveData();
+            displayBrowseCourses();
+            displayEnrolledCourses();
+            showAlert('Enrolled successfully!');
+        }
+
+        function viewCourse(courseId) {
+            const course = data.courses.find(c => c.id == courseId);
+            const materials = data.materials.filter(m => m.courseId == courseId);
+            const quizzes = data.quizzes.filter(q => q.courseId == courseId);
+
+            let html = `
+                <h2>${course.title}</h2>
+                <p style="color: #999; margin-bottom: 20px;">Category: ${course.category} | Difficulty: ${course.difficulty}</p>
+                <p>${course.description}</p>
+
+                <h3 style="margin-top: 30px; margin-bottom: 15px;">📚 Learning Materials</h3>
+                ${materials.length === 0 ? '<p>No materials yet.</p>' : ''}
+                ${materials.map(m => `<div class="material-item">
+                    <div class="material-info">
+                        <div class="material-title">${m.title}</div>
+                        <div class="material-meta">${m.type} | ${m.fileSize} KB</div>
+                    </div>
+                </div>`).join('')}
+
+                <h3 style="margin-top: 30px; margin-bottom: 15px;">📝 Quizzes</h3>
+                ${quizzes.length === 0 ? '<p>No quizzes yet.</p>' : ''}
+                ${quizzes.map(q => `<div class="quiz-card">
+                    <div class="quiz-title">${q.title}</div>
+                    <div class="quiz-meta">${q.questions.length} Questions | Passing: ${q.passingScore}%</div>
+                    <button class="btn-primary btn-small" onclick="takeQuiz(${q.id})" style="margin-top: 10px;">Take Quiz</button>
+                </div>`).join('')}
+            `;
+            document.getElementById('courseDetails').innerHTML = html;
+            document.getElementById('courseModal').classList.add('show');
+        }
+
+        function displayEnrolledCourses() {
+            const grid = document.getElementById('enrolledCoursesGrid');
+            const enrolledIds = [...new Set(data.enrollments.map(e => e.courseId))];
+            const enrolled = data.courses.filter(c => enrolledIds.includes(c.id));
+
+            if (enrolled.length === 0) {
+                grid.innerHTML = '<div class="no-data">No enrolled courses yet.</div>';
+                return;
+            }
+
+            let html = '';
+            enrolled.forEach(course => {
+                const materials = data.materials.filter(m => m.courseId == course.id);
+                const quizzes = data.quizzes.filter(q => q.courseId == course.id);
+
+                html += `<div class="course-card">
+                    <div class="course-header">
+                        <div class="course-title">${course.title}</div>
+                        <div class="course-meta">${course.category}</div>
+                    </div>
+                    <div class="course-content">
+                        <div class="course-description">${course.description}</div>
+                        <div class="course-stats">
+                            <div class="course-stat">
+                                <span class="value">${materials.length}</span>
+                                Materials
+                            </div>
+                            <div class="course-stat">
+                                <span class="value">${quizzes.length}</span>
+                                Quizzes
+                            </div>
+                            <div class="course-stat">
+                                <span class="value">${course.difficulty}</span>
+                                Level
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="btn-primary btn-small" onclick="viewCourse(${course.id})">View</button>
+                            <button class="btn-secondary btn-small" onclick="unenrollCourse(${course.id})">Unenroll</button>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            grid.innerHTML = html;
+        }
+
+        function unenrollCourse(courseId) {
+            if (confirm('Unenroll from this course?')) {
+                data.enrollments = data.enrollments.filter(e => e.courseId !== courseId);
+                saveData();
+                displayEnrolledCourses();
+                displayBrowseCourses();
+                showAlert('Unenrolled successfully!');
+            }
+        }
+
+        function displayAvailableQuizzes() {
+            const grid = document.getElementById('quizzesGrid');
+            if (data.quizzes.length === 0) {
+                grid.innerHTML = '<div class="no-data">No quizzes available.</div>';
+                return;
+            }
+
+            let html = '';
+            data.quizzes.forEach(quiz => {
+                const course = data.courses.find(c => c.id == quiz.courseId);
+                html += `<div class="quiz-card">
+                    <div class="quiz-title">${quiz.title}</div>
+                    <div class="quiz-meta">Course: ${course?.title || 'Unknown'}</div>
+                    <p style="color: #666; margin: 10px 0; font-size: 0.9em;">${quiz.description}</p>
+                    <div style="margin-top: 10px; font-size: 0.9em; color: #999;">
+                        Questions: ${quiz.questions.length} | Passing Score: ${quiz.passingScore}%
+                    </div>
+                    <button class="btn-primary btn-small" onclick="takeQuiz(${quiz.id})" style="margin-top: 15px; width: 100%;">Take Quiz</button>
+                </div>`;
+            });
+            grid.innerHTML = html;
+        }
+
+        function takeQuiz(quizId) {
+            currentQuizId = quizId;
+            const quiz = data.quizzes.find(q => q.id === quizId);
+            const course = data.courses.find(c => c.id === quiz.courseId);
+
+            let html = `
+                <div class="modal-header">${quiz.title}</div>
+                <p style="color: #666; margin-bottom: 20px;">Course: ${course?.title} | Questions: ${quiz.questions.length}</p>
+                <form id="quizAnswerForm">
+            `;
+
+            quiz.questions.forEach((q, idx) => {
+                html += `
+                    <div class="question-item">
+                        <div class="question-text">${idx + 1}. ${q.text}</div>
+                        <div class="question-options">
+                            ${Object.entries(q.options).map(([key, option]) => `
+                                <label class="question-option">
+                                    <input type="radio" name="question-${idx}" value="${key}" required>
+                                    ${key}. ${option}
+                                </label>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                    <div style="margin-top: 25px; display: flex; gap: 10px; justify-content: flex-end;">
+                        <button type="button" class="btn-secondary" onclick="closeQuizModal()">Cancel</button>
+                        <button type="submit" class="btn-primary">Submit Quiz</button>
+                    </div>
+                </form>
+            `;
+
+            document.getElementById('quizContent').innerHTML = html;
+            document.getElementById('quizModal').classList.add('show');
+
+            document.getElementById('quizAnswerForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                submitQuiz();
+            });
+        }
+
+        function submitQuiz() {
+            const quiz = data.quizzes.find(q => q.id === currentQuizId);
+            let score = 0;
+
+            quiz.questions.forEach((q, idx) => {
+                const selected = document.querySelector(`input[name="question-${idx}"]:checked`)?.value;
+                if (selected === q.correctAnswer) {
+                    score++;
+                }
+            });
+
+            const percentage = Math.round((score / quiz.questions.length) * 100);
+            const passed = percentage >= quiz.passingScore;
+
+            const result = {
+                id: Date.now(),
+                quizId: currentQuizId,
+                studentName: 'Student ' + Math.floor(Math.random() * 1000),
+                score: percentage,
+                passed: passed,
+                date: new Date().toISOString()
+            };
+
+            data.results.push(result);
+            saveData();
+
+            let html = `
+                <div class="modal-header">Quiz Submitted</div>
+                <div class="score-circle">${percentage}%</div>
+                <h3 style="text-align: center; color: ${passed ? '#27ae60' : '#e74c3c'}; margin-bottom: 20px;">
+                    ${passed ? '✓ Passed!' : '✗ Failed'}
+                </h3>
+                <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
+                    <p><strong>Your Score:</strong> ${percentage}%</p>
+                    <p><strong>Passing Score:</strong> ${quiz.passingScore}%</p>
+                    <p><strong>Correct Answers:</strong> ${score} of ${quiz.questions.length}</p>
+                </div>
+                <button class="btn-primary" style="width: 100%;" onclick="closeQuizModal()">Close</button>
+            `;
+
+            document.getElementById('quizContent').innerHTML = html;
+            displayStudentResults();
+        }
+
+        function closeQuizModal() {
+            document.getElementById('quizModal').classList.remove('show');
+        }
+
+        function displayStudentResults() {
+            const list = document.getElementById('studentResultsList');
+            if (data.results.length === 0) {
+                list.innerHTML = '<div class="no-data">No quiz results yet.</div>';
+                return;
+            }
+
+            let html = '';
+            data.results.forEach(result => {
+                const quiz = data.quizzes.find(q => q.id == result.quizId);
+                const course = data.courses.find(c => c.id == quiz?.courseId);
+                const statusClass = result.passed ? 'badge-success' : 'badge-warning';
+
+                html += `<div class="result-card">
+                    <h4>${quiz?.title || 'Unknown Quiz'}</h4>
+                    <div style="font-size: 0.9em; color: #666; margin-bottom: 15px;">
+                        Course: ${course?.title || 'Unknown'} | Attempt: ${new Date(result.date).toLocaleDateString()}
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <div style="font-size: 2em; font-weight: bold; color: #667eea;">${result.score}%</div>
+                            <div style="color: #999;">Score</div>
+                        </div>
+                        <div style="text-align: right;">
+                            <span class="badge ${statusClass}">${result.passed ? 'PASSED' : 'FAILED'}</span>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            list.innerHTML = html;
+        }
+
+        // Modal Controls
+        document.querySelectorAll('.modal-close').forEach(close => {
+            close.addEventListener('click', () => {
+                close.closest('.modal').classList.remove('show');
+            });
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.classList.remove('show');
+            }
+        });
+
+        // Initial Load
+        updateTutorDashboard();
+        updateCourseSelects();
+    </script>
+</body>
+</html>
