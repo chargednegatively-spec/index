@@ -425,6 +425,42 @@ footer {
 @media (max-width: 780px) {
   .parts-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
 }
+/* ========== CAR CARD BUTTONS ========== */
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+.btn-ai {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+  width: 100%;
+}
+.btn-ai:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+.btn-whatsapp {
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+.btn-whatsapp:hover {
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
   </style>
 </head>
 <body>
@@ -519,7 +555,10 @@ footer {
             <h3>Kia Cerato</h3>
             <p>Clean sedan, 2018 model, automatic, full option.</p>
             <p class="price">₦ 7,500,000 / 4,500,000 FCFA</p>
-            <button class="btn btn-primary">Inquire Now</button>
+            <div class="button-group">
+              <a class="btn-ai" href="https://wa.me/2349162287868?text=Hello%20Army%20of%20God%20Automobile%21%20I%20want%20to%20BUY%20the%20Kia%20Cerato%20-%20please%20send%20details%20and%20purchase%20process." target="_blank" rel="noopener">🛒 Buy Now</a>
+              <a class="btn-ai btn-whatsapp" href="https://wa.me/2349162287868?text=Hello%20Army%20of%20God%20Automobile%21%20I%20am%20interested%20in%20the%20Kia%20Cerato%20for%20sale." target="_blank" rel="noopener">💬 Chat on WhatsApp</a>
+            </div>
           </div>
         </article>
         <article class="card">
@@ -528,7 +567,10 @@ footer {
             <h3>Toyota Hilux</h3>
             <p>2020 pickup, diesel, 4x4, excellent condition.</p>
             <p class="price">₦ 18,500,000 / 11,000,000 FCFA</p>
-            <button class="btn btn-primary">Inquire Now</button>
+            <div class="button-group">
+              <a class="btn-ai" href="https://wa.me/2349162287868?text=Hello%20Army%20of%20God%20Automobile%21%20I%20want%20to%20BUY%20the%20Toyota%20Hilux%20-%20please%20send%20details%20and%20purchase%20process." target="_blank" rel="noopener">🛒 Buy Now</a>
+              <a class="btn-ai btn-whatsapp" href="https://wa.me/2349162287868?text=Hello%20Army%20of%20God%20Automobile%21%20I%20am%20interested%20in%20the%20Toyota%20Hilux%20for%20sale." target="_blank" rel="noopener">💬 Chat on WhatsApp</a>
+            </div>
           </div>
         </article>
         <article class="card">
@@ -537,7 +579,10 @@ footer {
             <h3>Toyota Yaris</h3>
             <p>2017 hatchback, fuel efficient, neat interior.</p>
             <p class="price">₦ 6,200,000 / 3,800,000 FCFA</p>
-            <button class="btn btn-primary">Inquire Now</button>
+            <div class="button-group">
+              <a class="btn-ai" href="https://wa.me/2349162287868?text=Hello%20Army%20of%20God%20Automobile%21%20I%20want%20to%20BUY%20the%20Toyota%20Yaris%20-%20please%20send%20details%20and%20purchase%20process." target="_blank" rel="noopener">🛒 Buy Now</a>
+              <a class="btn-ai btn-whatsapp" href="https://wa.me/2349162287868?text=Hello%20Army%20of%20God%20Automobile%21%20I%20am%20interested%20in%20the%20Toyota%20Yaris%20for%20sale." target="_blank" rel="noopener">💬 Chat on WhatsApp</a>
+            </div>
           </div>
         </article>
         <article class="card">
@@ -546,7 +591,10 @@ footer {
             <h3>Mercedes-Benz Van</h3>
             <p>Spacious transport van, diesel, well maintained.</p>
             <p class="price">₦ 12,000,000 / 7,200,000 FCFA</p>
-            <button class="btn btn-primary">Inquire Now</button>
+            <div class="button-group">
+              <a class="btn-ai" href="https://wa.me/2349162287868?text=Hello%20Army%20of%20God%20Automobile%21%20I%20want%20to%20BUY%20the%20Mercedes-Benz%20Van%20-%20please%20send%20details%20and%20purchase%20process." target="_blank" rel="noopener">🛒 Buy Now</a>
+              <a class="btn-ai btn-whatsapp" href="https://wa.me/2349162287868?text=Hello%20Army%20of%20God%20Automobile%21%20I%20am%20interested%20in%20the%20Mercedes-Benz%20Van%20for%20sale." target="_blank" rel="noopener">💬 Chat on WhatsApp</a>
+            </div>
           </div>
         </article>
       </div>
